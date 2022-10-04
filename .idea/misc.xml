@@ -4,13 +4,35 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_bar_item.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_nav.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_nav_item.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_nav_menu_item.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_nav_menu_selected.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_rounded_pink.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_selected.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bottom_nav_home.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bottom_nav_search.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bottom_nav_trip.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_brief_case.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_calendar.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_guide.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_home.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_search.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_bookmark.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_calendar.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_guide.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_home.xml" value="0.2815" />
-        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_search.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_manu_icon_tint.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_guide.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_home.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_search.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_trip.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_guide.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_search.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_trip.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36666666666666664" />
       </map>
     </option>
