@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_bar_item.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_calendar.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_guide.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_home.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_search.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_home.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
