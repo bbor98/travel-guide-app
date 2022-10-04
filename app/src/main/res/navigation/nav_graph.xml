@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.trip.TripFragment"
+        android:label="fragment_trip"
+        tools:layout="@layout/fragment_trip" />
+    <fragment
+        android:id="@+id/guideFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.guide.GuideFragment"
+        android:label="fragment_guide"
+        tools:layout="@layout/fragment_guide" >
+        <action
+            android:id="@+id/action_guideFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_fullscreenImageFragment"
+            app:destination="@id/fullscreenImageFragment" />
+        <argument
+            android:name="travel"
+            app:argType="com.borabor.travelguideapp.domain.model.Travel" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullscreenImageFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.fullscreenimage.FullscreenImageFragment"
+        android:label="fragment_fullscreen_image"
+        tools:layout="@layout/fragment_fullscreen_image" >
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.borabor.travelguideapp.presentation.ui.searchresult.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <argument
+            android:name="query"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
+</navigation>
