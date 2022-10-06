@@ -28,14 +28,8 @@
             app:hint="@{@string/where_next}" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_large"
-            android:fontFamily="@font/source_sans_pro_semibold"
-            android:text="@string/top_destinations"
-            android:textColor="@color/blue4"
-            android:textSize="@dimen/title_medium" />
+            style="@style/Subtitle"
+            android:text="@string/top_destinations" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -64,13 +58,8 @@
         </FrameLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:fontFamily="@font/source_sans_pro_semibold"
-            android:text="@string/nearby_attractions"
-            android:textColor="@color/blue4"
-            android:textSize="@dimen/title_medium" />
+            style="@style/Subtitle"
+            android:text="@string/nearby_attractions" />
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -16,4 +16,14 @@
         <item name="android:textColor">@color/blue4</item>
         <item name="android:textSize">@dimen/title_main</item>
     </style>
+
+    <style name="Subtitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginTop">@dimen/margin_large</item>
+        <item name="fontFamily">@font/source_sans_pro_semibold</item>
+        <item name="android:textColor">@color/blue4</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
 </resources>
