@@ -20,3 +20,8 @@ fun ImageView.loadImage(imageUrl: String) {
         .error(R.drawable.ic_broken_image)
         .into(this)
 }
+
+@BindingAdapter("tint")
+fun ImageView.setImageTint(color: Int) {
+    setColorFilter(color)
+}

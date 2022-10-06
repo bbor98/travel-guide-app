@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="country"
+            type="String" />
+
+        <variable
+            name="city"
+            type="String" />
+
+        <variable
+            name="isBookmark"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_nearby_height"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/card_elevation">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                loadImage="@{imageUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.4"
+                android:background="@color/black" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@{country}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/title_large"
+                tools:text="Country" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/source_sans_pro_regular"
+                android:text="@{city}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/text_normal"
+                tools:text="City" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/btBookmark"
+            android:layout_width="@dimen/bookmark_size"
+            android:layout_height="@dimen/bookmark_size"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/margin_small">
+
+            <View
+                android:foreground="?selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@drawable/bg_bookmark" />
+
+            <ImageView
+                tint="@{isBookmark ? @color/pink : @color/white2}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

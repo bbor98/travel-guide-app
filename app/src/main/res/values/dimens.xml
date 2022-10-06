@@ -33,4 +33,13 @@
 
     <dimen name="item_deal_width">260dp</dimen>
     <dimen name="item_deal_height">140dp</dimen>
+
+    <dimen name="item_top_dest_width">150dp</dimen>
+    <dimen name="item_top_dest_height">200dp</dimen>
+
+    <dimen name="item_nearby_height">160dp</dimen>
+
+    <dimen name="bookmark_size">40dp</dimen>
+
+    <dimen name="image_alpha">0.4</dimen>
 </resources>

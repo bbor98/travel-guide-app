@@ -21,4 +21,8 @@
     <string name="deals">DEALS</string>
     <string name="all">All</string>
     <string name="transportations">Transportations</string>
+
+    <string name="where_next">Where next?</string>
+    <string name="top_destinations">TOP DESTINATIONS</string>
+    <string name="nearby_attractions">NEARBY ATTRACTIONS</string>
 </resources>

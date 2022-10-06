@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="country"
+            type="String" />
+
+        <variable
+            name="city"
+            type="String" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/item_top_dest_width"
+        android:layout_height="@dimen/item_top_dest_height"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/card_elevation">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                loadImage="@{imageUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.4"
+                android:background="@color/black" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@{country}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/title_small"
+                tools:text="Country" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/source_sans_pro_regular"
+                android:text="@{city}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/text_normal"
+                tools:text="City" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
