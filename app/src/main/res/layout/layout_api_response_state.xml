@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="isError"
+            type="Boolean" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/api_response_state_padding">
+
+        <ImageView
+            isVisible="@{isError}"
+            android:layout_width="@dimen/network_error_image_size"
+            android:layout_height="@dimen/network_error_image_size"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_internet" />
+
+        <ProgressBar
+            isVisible="@{isLoading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/pink" />
+
+    </FrameLayout>
+
+</layout>

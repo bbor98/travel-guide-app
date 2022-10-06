@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HomeTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="fontFamily">@font/source_sans_pro_semibold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+</resources>

@@ -4,10 +4,21 @@
     <string name="error_connection">Unable to fetch data, please check your internet connection and try again.</string>
     <string name="error_service">API service is not responding at the moment, please try again later.</string>
     <string name="error_unknown">Unknown error occurred.</string>
+
+    <string name="retry">Retry</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="trip">Trip</string>
     <string name="guide">Guide</string>
+
+    <string name="flights">Flights</string>
+    <string name="hotels">Hotels</string>
+    <string name="cars">Cars</string>
+    <string name="taxi">Taxi</string>
+    <string name="next_destination">Where\'s your\nnext destination?</string>
+    <string name="deals">DEALS</string>
+    <string name="all">All</string>
+    <string name="transportations">Transportations</string>
 </resources>

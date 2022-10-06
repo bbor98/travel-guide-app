@@ -19,6 +19,8 @@
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_home.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_baseline_search.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_bookmark.xml" value="0.2815" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_broken_image.xml" value="0.2805" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_no_internet.xml" value="0.2805" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_bookmark.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_calendar.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_guide.xml" value="0.2815" />
@@ -33,6 +35,12 @@
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_search.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_trip.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_home.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_deal.xml" value="0.5" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/layout_home_banner_button.xml" value="1.0" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/layout_home_banner_item.xml" value="0.365625" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/layout_network_state.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/layout_ui_state.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36666666666666664" />
       </map>
     </option>
