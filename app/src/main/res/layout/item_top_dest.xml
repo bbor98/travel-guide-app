@@ -56,22 +56,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@{country}"
+                android:text="@{city}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/title_small"
-                tools:text="Country" />
+                tools:text="City" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:text="@{city}"
+                android:text="@{country}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/text_normal"
-                tools:text="City" />
+                tools:text="Country" />
 
         </LinearLayout>
 
