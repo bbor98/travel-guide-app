@@ -11,5 +11,6 @@ data class Travel(
     val description: String,
     val id: String,
     val images: List<Image>,
+    val isBookmark: Boolean,
     val title: String
 ) : Parcelable

@@ -22,5 +22,6 @@ fun TravelDTO.toTravel() = Travel(
     description = description,
     id = id,
     images = images.map { it.toImage() },
+    isBookmark = isBookmark,
     title = title
 )

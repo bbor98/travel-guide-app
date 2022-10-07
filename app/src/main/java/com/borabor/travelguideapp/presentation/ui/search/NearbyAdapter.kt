@@ -1,9 +1,10 @@
 package com.borabor.travelguideapp.presentation.ui.search
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.ItemNearbyBinding
@@ -12,18 +13,15 @@ import com.borabor.travelguideapp.domain.model.Travel
 class NearbyAdapter(
     private val onBookmarkClicked: (String) -> Unit,
     private val onItemClicked: (Travel) -> Unit
-) : RecyclerView.Adapter<NearbyAdapter.ViewHolder>() {
-
-    private var list = listOf<Travel>()
-
+) : ListAdapter<Travel, NearbyAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(val view: ItemNearbyBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.btBookmark.setOnClickListener {
-                onBookmarkClicked(list[adapterPosition].id)
+                onBookmarkClicked(getItem(adapterPosition).id)
             }
 
             view.root.setOnClickListener {
-                onItemClicked(list[adapterPosition])
+                onItemClicked(getItem(adapterPosition))
             }
         }
     }
@@ -33,19 +31,17 @@ class NearbyAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.imageUrl = list[position].images.first().url
-        holder.view.country = list[position].country
-        holder.view.city = list[position].city
-        // TODO
-        // holder.view.isBookmark = list[position].isBookmark
-        holder.view.isBookmark = false
+        val item = getItem(position)
+        holder.view.apply {
+            imageUrl = item.images.first().url
+            country = item.country
+            city = item.city
+            isBookmark = item.isBookmark
+        }
     }
 
-    override fun getItemCount() = list.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submitList(newList: List<Travel>) {
-        list = newList
-        notifyDataSetChanged()
+    object DiffCallback : DiffUtil.ItemCallback<Travel>() {
+        override fun areItemsTheSame(oldItem: Travel, newItem: Travel) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Travel, newItem: Travel) = oldItem == newItem
     }
 }

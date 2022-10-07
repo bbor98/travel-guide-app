@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -57,6 +58,23 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun setupAdapters() {
+        adapterTopDest = TopDestAdapter { travel ->
+            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvTopDest.adapter = adapterTopDest
+
+        adapterNearby = NearbyAdapter({ viewModel.updateBookmark(it) }) { travel ->
+            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvNearby.adapter = adapterNearby
+        binding.rvNearby.itemAnimator = null
+    }
+
     private fun navigateWithQuery() {
         val query = binding.search.etSearch.text.toString()
         val action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(query)
@@ -72,6 +90,10 @@ class SearchFragment : Fragment() {
             adapterNearby.submitList(nearbyAttractions)
         }
 
+        viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
+            if (bookmarkState.isError) Toast.makeText(requireContext(), bookmarkState.errorMessage, Toast.LENGTH_SHORT).show()
+        }
+
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             if (uiState.isError) {
                 snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
@@ -81,20 +103,6 @@ class SearchFragment : Fragment() {
                 snackbar!!.show()
             }
         }
-    }
-
-    private fun setupAdapters() {
-        adapterTopDest = TopDestAdapter { travel ->
-            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
-            findNavController().navigate(action)
-        }
-        binding.rvTopDest.adapter = adapterTopDest
-
-        adapterNearby = NearbyAdapter({ viewModel.bookmark(it) }) { travel ->
-            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
-            findNavController().navigate(action)
-        }
-        binding.rvNearby.adapter = adapterNearby
     }
 
     override fun onPause() {

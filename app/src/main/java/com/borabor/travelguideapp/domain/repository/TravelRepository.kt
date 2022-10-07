@@ -7,4 +7,5 @@ import com.borabor.travelguideapp.util.Resource
 interface TravelRepository {
     suspend fun getTravelList(): Resource<List<Travel>>
     suspend fun getGuideCategories(): Resource<List<Category>>
+    suspend fun updateBookmark(id: String, isBookmark: Boolean): Resource<Travel>
 }

@@ -87,11 +87,11 @@
             android:layout_margin="@dimen/margin_small">
 
             <View
-                android:foreground="?selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.2"
-                android:background="@drawable/bg_bookmark" />
+                android:background="@drawable/bg_bookmark"
+                android:foreground="?selectableItemBackground" />
 
             <ImageView
                 tint="@{isBookmark ? @color/pink : @color/white2}"
