@@ -25,4 +25,14 @@
     <string name="where_next">Where next?</string>
     <string name="top_destinations">TOP DESTINATIONS</string>
     <string name="nearby_attractions">NEARBY ATTRACTIONS</string>
+
+    <string name="trip_plan">Trip Plan</string>
+    <string name="trips">Trips</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="destination">Destination</string>
+    <string name="start_date">Start Date</string>
+    <string name="pick_start_date">Pick a start date</string>
+    <string name="end_date">End Date</string>
+    <string name="pick_end_date">Pick an end date</string>
+    <string name="add_trip">Add Trip</string>
 </resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/bottomSheetContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            loadImage="@{imageUrl}"
+            app:shapeAppearanceOverlay="@style/ShapeableImageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_trip_plan_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_image" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:text="@string/destination" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_medium">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_location"
+                app:tint="@color/blue4" />
+
+            <Spinner
+                android:backgroundTint="@color/black"
+                android:id="@+id/spDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/start_date" />
+
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/margin_medium"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            android:text="@string/pick_start_date"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_normal"
+            app:drawableStartCompat="@drawable/ic_outline_calendar"
+            app:drawableTint="@color/blue4" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_marginTop="0dp"
+            android:text="@string/end_date" />
+
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:drawablePadding="@dimen/margin_small"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:gravity="center"
+            android:padding="@dimen/margin_medium"
+            android:text="@string/pick_end_date"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_normal"
+            app:drawableStartCompat="@drawable/ic_outline_calendar"
+            app:drawableTint="@color/blue4" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/AddButton"
+            android:id="@+id/btAddTrip"
+            android:text="@string/add_trip" />
+
+    </LinearLayout>
+
+</layout>

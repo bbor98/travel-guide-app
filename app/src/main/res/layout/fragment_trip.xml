@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.trip.TripFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.borabor.travelguideapp.presentation.ui.trip.TripViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".presentation.ui.trip.TripFragment">
 
-</FrameLayout>
+        <TextView
+            style="@style/MainTitle"
+            android:text="@string/trip_plan" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlTripPlan"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@color/white"
+            app:tabIconTint="@color/trip_plan_tab_tint"
+            app:tabIndicatorColor="@color/pink"
+            app:tabIndicatorFullWidth="false"
+            app:tabInlineLabel="true"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/pink"
+            app:tabTextAppearance="@style/TripPlanTabTextAppearance"
+            app:tabTextColor="@color/gray3">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/selector_trip_plan_tab_trips"
+                android:text="@string/trips" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/selector_trip_plan_tab_bookmark"
+                android:text="@string/bookmark" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTripPlan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingEnd="@dimen/margin_medium"
+                android:paddingBottom="96dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <include
+                android:id="@+id/apiResponseState"
+                layout="@layout/layout_api_response_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:isError="@{viewModel.uiState.error}"
+                app:isLoading="@{viewModel.uiState.loading}" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="112dp"
+                android:backgroundTint="@color/pink"
+                android:src="@drawable/ic_add"
+                app:borderWidth="0dp"
+                app:tint="@color/white2" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

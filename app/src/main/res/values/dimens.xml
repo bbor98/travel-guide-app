@@ -41,5 +41,7 @@
 
     <dimen name="bookmark_size">40dp</dimen>
 
-    <dimen name="image_alpha">0.4</dimen>
+    <dimen name="item_trip_plan_height">200dp</dimen>
+    <dimen name="bottom_sheet_radius">16dp</dimen>
+    <dimen name="button_add_width">310dp</dimen>
 </resources>

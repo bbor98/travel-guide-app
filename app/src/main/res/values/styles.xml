@@ -7,6 +7,12 @@
         <item name="android:textSize">@dimen/text_normal</item>
     </style>
 
+    <style name="TripPlanTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="fontFamily">@font/source_sans_pro_bold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
     <style name="MainTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -25,5 +31,30 @@
         <item name="fontFamily">@font/source_sans_pro_semibold</item>
         <item name="android:textColor">@color/blue4</item>
         <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="BottomSheetStyleWrapper">
+        <item name="android:background">@drawable/bg_bottom_sheet</item>
+    </style>
+
+    <style name="ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_radius</item>
+        <item name="cornerSizeTopRight">@dimen/bottom_sheet_radius</item>
+    </style>
+
+    <style name="AddButton">
+        <item name="android:layout_width">@dimen/button_add_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/margin_large</item>
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/white2</item>
+        <item name="android:textSize">@dimen/text_normal</item>
     </style>
 </resources>

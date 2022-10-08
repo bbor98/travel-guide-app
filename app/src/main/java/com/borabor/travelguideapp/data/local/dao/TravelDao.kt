@@ -5,7 +5,7 @@ import com.borabor.travelguideapp.domain.model.Travel
 
 @Dao
 interface TravelDao {
-    @Query("SELECT * FROM travel ORDER BY date")
+    @Query("SELECT * FROM travel ORDER BY dateCreated")
     suspend fun getTrips(): List<Travel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -13,12 +13,14 @@ fun View.setVisibility(isVisible: Boolean) {
 }
 
 @BindingAdapter("loadImage")
-fun ImageView.loadImage(imageUrl: String) {
-    Glide.with(context)
-        .load(imageUrl)
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .error(R.drawable.ic_broken_image)
-        .into(this)
+fun ImageView.loadImage(imageUrl: String?) {
+    imageUrl?.let {
+        Glide.with(context)
+            .load(it)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .error(R.drawable.ic_broken_image)
+            .into(this)
+    }
 }
 
 @BindingAdapter("tint")

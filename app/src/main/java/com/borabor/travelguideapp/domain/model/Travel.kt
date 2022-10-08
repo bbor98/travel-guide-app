@@ -13,10 +13,10 @@ data class Travel(
     val category: String,
     val city: String,
     val country: String,
-    val date: String,
+    val dateCreated: Long? = null,
     val description: String,
     val images: List<Image>,
     val isBookmark: Boolean,
-    val schedule: String,
+    val schedule: String? = null,
     val title: String
 ) : Parcelable

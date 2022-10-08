@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="imageCount"
+            type="String" />
+
+        <variable
+            name="tripLength"
+            type="String" />
+
+        <variable
+            name="isTrips"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_trip_plan_height"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/card_elevation">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                loadImage="@{imageUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.4"
+                android:background="@color/black" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@{title}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/title_large"
+                tools:text="Title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/source_sans_pro_regular"
+                android:text="@{text}"
+                android:textAlignment="center"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/text_normal"
+                tools:text="Text" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/btDelete"
+            android:layout_width="@dimen/bookmark_size"
+            android:layout_height="@dimen/bookmark_size"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/margin_small">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@drawable/bg_bookmark"
+                android:foreground="?selectableItemBackground" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_close" />
+
+        </FrameLayout>
+
+        <TextView
+            isVisible="@{isTrips}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/margin_small"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:gravity="center"
+            android:text="@{imageCount}"
+            android:textColor="@color/white2"
+            android:textSize="@dimen/text_normal"
+            app:drawableStartCompat="@drawable/ic_image"
+            app:drawableTint="@color/white2"
+            tools:text="4 images" />
+
+        <TextView
+            isVisible="@{isTrips}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/margin_small"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/source_sans_pro_regular"
+            android:gravity="center"
+            android:text="@{tripLength}"
+            android:textColor="@color/white2"
+            android:textSize="@dimen/text_normal"
+            app:drawableStartCompat="@drawable/ic_time"
+            app:drawableTint="@color/white2"
+            tools:text="5 days trip" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
