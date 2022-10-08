@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
+            name="isBookmark"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/white2"
+        android:layout_width="@dimen/item_top_pick_width"
+        android:layout_height="@dimen/item_top_pick_height"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/card_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    loadImage="@{imageUrl}"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_top_pick_image_height"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <FrameLayout
+                    android:id="@+id/btBookmark"
+                    android:layout_width="@dimen/bookmark_size"
+                    android:layout_height="@dimen/bookmark_size"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.2"
+                        android:background="@drawable/bg_bookmark"
+                        android:foreground="?selectableItemBackground" />
+
+                    <ImageView
+                        tint="@{isBookmark ? @color/pink : @color/white2}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/source_sans_pro_semibold"
+                android:text="@{title}"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/text_small"
+                tools:text="TITLE" />
+
+            <TextView
+                android:text="@{description}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_small"
+                tools:text="Description" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

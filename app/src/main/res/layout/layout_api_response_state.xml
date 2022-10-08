@@ -15,8 +15,7 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/api_response_state_padding">
+        android:layout_height="wrap_content">
 
         <ImageView
             isVisible="@{isError}"

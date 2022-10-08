@@ -1,60 +1,165 @@
 package com.borabor.travelguideapp.presentation.ui.guide
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
+import com.borabor.travelguideapp.databinding.FragmentGuideBinding
+import com.borabor.travelguideapp.domain.model.Category
+import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GuideFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class GuideFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentGuideBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: GuideViewModel by viewModels()
+
+    private lateinit var adapterMightNeed: MightNeedAdapter
+    private lateinit var adapterTopPick: TopPickAdapter
+
+    private var snackbar: Snackbar? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentGuideBinding.inflate(inflater).apply {
+            lifecycleOwner = this@GuideFragment
+            viewModel = this@GuideFragment.viewModel
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupAdapters()
+        setupSearchBar()
+        subscribeToObservables()
+    }
+
+    private fun setupAdapters() {
+        adapterMightNeed = MightNeedAdapter { travel ->
+            val action = GuideFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvMightNeed.adapter = adapterMightNeed
+
+        adapterTopPick = TopPickAdapter({ viewModel.updateBookmark(it) }) { travel ->
+            val action = GuideFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvTopPick.adapter = adapterTopPick
+        binding.rvTopPick.itemAnimator = null
+    }
+
+    private fun setupSearchBar() {
+        binding.search.apply {
+            etSearch.setOnEditorActionListener { _, i, keyEvent ->
+                if (i == EditorInfo.IME_ACTION_NEXT || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER) && (keyEvent.action == KeyEvent.ACTION_DOWN))) {
+                    navigateWithQuery()
+                    true
+                } else false
+            }
+
+            ivSearch.setOnClickListener {
+                navigateWithQuery()
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_guide, container, false)
+    private fun setupChips(categoryList: List<Category>) {
+        categoryList.forEach { category ->
+            binding.cgCategories.addView(
+                Chip(context).apply {
+                    setChipBackgroundColorResource(R.color.white2)
+                    setChipStrokeColorResource(R.color.gray2)
+                    chipStrokeWidth = 1f
+                    setChipIconResource(setChipIconByCategoryId(category.id))
+                    setChipIconTintResource(R.color.blue)
+                    setIconStartPaddingResource(R.dimen.chip_icon_start_padding)
+                    setTextAppearance(R.style.ChipText)
+                    text = category.title
+                    setOnClickListener {
+                        Toast.makeText(context, category.title, Toast.LENGTH_SHORT).show()
+                    }
+                })
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GuideFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GuideFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setChipIconByCategoryId(id: String): Int {
+        return when (id.toInt()) {
+            1 -> R.drawable.ic_taxi
+            2 -> R.drawable.ic_car
+            3 -> R.drawable.ic_museum
+            4 -> R.drawable.ic_restaurant
+            5 -> R.drawable.ic_resort
+            6 -> R.drawable.ic_mall
+            else -> R.drawable.ic_sightseeing
+        }
+    }
+
+    private fun navigateWithQuery() {
+        val query = binding.search.etSearch.text.toString()
+        val action = GuideFragmentDirections.actionGuideFragmentToSearchResultFragment(query)
+        findNavController().navigate(action)
+    }
+
+    private fun subscribeToObservables() {
+        viewModel.mightNeedList.observe(viewLifecycleOwner) { mightNeedList ->
+            adapterMightNeed.submitList(mightNeedList)
+        }
+
+        viewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
+            setupChips(categoryList)
+        }
+
+        viewModel.topPickList.observe(viewLifecycleOwner) { topPickList ->
+            adapterTopPick.submitList(topPickList)
+        }
+
+        viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
+            if (bookmarkState.isError) Toast.makeText(requireContext(), bookmarkState.errorMessage, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.travelUiState.observe(viewLifecycleOwner) { uiState ->
+            if (uiState.isError) {
+                snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
+                    .setAnchorView(R.id.bottomNav)
+                    .setAction(R.string.retry) { viewModel.retry() }
+
+                snackbar!!.show()
             }
+        }
+
+        viewModel.categoryUiState.observe(viewLifecycleOwner) { uiState ->
+            if (uiState.isError) {
+                snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
+                    .setAnchorView(R.id.bottomNav)
+                    .setAction(R.string.retry) { viewModel.retry() }
+
+                snackbar!!.show()
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        snackbar?.dismiss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

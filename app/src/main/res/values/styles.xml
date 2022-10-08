@@ -57,4 +57,11 @@
         <item name="android:textColor">@color/white2</item>
         <item name="android:textSize">@dimen/text_normal</item>
     </style>
+
+    <style name="ChipText">
+        <item name="android:fontFamily">@font/source_sans_pro_semibold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
 </resources>

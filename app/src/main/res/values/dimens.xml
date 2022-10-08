@@ -16,7 +16,6 @@
 
     <dimen name="card_elevation">4dp</dimen>
 
-    <dimen name="api_response_state_padding">60dp</dimen>
     <dimen name="network_error_image_size">48dp</dimen>
 
     <dimen name="title_main">30sp</dimen>
@@ -44,4 +43,13 @@
     <dimen name="item_trip_plan_height">200dp</dimen>
     <dimen name="bottom_sheet_radius">16dp</dimen>
     <dimen name="button_add_width">310dp</dimen>
+
+    <dimen name="item_might_need_width">120dp</dimen>
+    <dimen name="item_might_need_height">144dp</dimen>
+
+    <dimen name="item_top_pick_width">256dp</dimen>
+    <dimen name="item_top_pick_height">272dp</dimen>
+    <dimen name="item_top_pick_image_height">160dp</dimen>
+    <dimen name="guide_chip_group_height">40dp</dimen>
+    <dimen name="chip_icon_start_padding">4dp</dimen>
 </resources>
