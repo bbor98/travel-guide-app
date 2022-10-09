@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.searchresult.SearchResultFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.borabor.travelguideapp.presentation.ui.searchresult.SearchResultViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        tools:context=".presentation.ui.searchresult.SearchResultFragment">
 
-</FrameLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_result_app_bar_height"
+            android:background="@color/white"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/Subtitle"
+                app:contentScrim="@color/white"
+                app:expandedTitleTextAppearance="@style/MainTitle"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:title="@{title}"
+                app:maxLines="3"
+                app:toolbarId="@id/toolbar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearchResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/margin_small"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <include
+            app:isError="@{viewModel.uiState.error}"
+            app:isLoading="@{viewModel.uiState.loading}"
+            layout="@layout/layout_api_response_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tvNoResults"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results_found"
+            android:textColor="@color/blue4"
+            android:textSize="@dimen/title_medium"
+            app:drawableTint="@color/blue4"
+            app:drawableTopCompat="@drawable/ic_search_off" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

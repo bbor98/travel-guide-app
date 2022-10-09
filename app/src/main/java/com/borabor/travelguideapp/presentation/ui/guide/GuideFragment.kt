@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentGuideBinding
 import com.borabor.travelguideapp.domain.model.Category
+import com.borabor.travelguideapp.util.checkQueryTextAndProceed
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -110,9 +111,10 @@ class GuideFragment : Fragment() {
     }
 
     private fun navigateWithQuery() {
-        val query = binding.search.etSearch.text.toString()
-        val action = GuideFragmentDirections.actionGuideFragmentToSearchResultFragment(query)
-        findNavController().navigate(action)
+        binding.search.etSearch.checkQueryTextAndProceed(this) { query ->
+            val action = GuideFragmentDirections.actionGuideFragmentToSearchResultFragment(query, getString(R.string.search_results_for, query))
+            findNavController().navigate(action)
+        }
     }
 
     private fun subscribeToObservables() {

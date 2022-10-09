@@ -57,4 +57,7 @@
     <dimen name="detail_image_size">56dp</dimen>
     <dimen name="detail_image_radius">56dp</dimen>
     <dimen name="detail_image_list_radius">16dp</dimen>
+    <dimen name="search_result_app_bar_height">200dp</dimen>
+    <dimen name="item_search_result_width">160dp</dimen>
+    <dimen name="item_search_result_height">120dp</dimen>
 </resources>

@@ -65,6 +65,9 @@
         <argument
             android:name="query"
             app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
 </navigation>

@@ -20,6 +20,7 @@
 
         <TextView
             style="@style/MainTitle"
+            android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/search" />
 
         <include

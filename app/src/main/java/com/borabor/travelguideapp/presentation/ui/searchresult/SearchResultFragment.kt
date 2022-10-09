@@ -1,60 +1,113 @@
 package com.borabor.travelguideapp.presentation.ui.searchresult
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
+import com.borabor.travelguideapp.databinding.FragmentSearchResultBinding
+import com.borabor.travelguideapp.util.hideBottomNav
+import com.borabor.travelguideapp.util.showBottomNav
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class SearchResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentSearchResultBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: SearchResultViewModel by viewModels()
+
+    private lateinit var adapter: SearchResultAdapter
+
+    private var snackbar: Snackbar? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentSearchResultBinding.inflate(inflater).apply {
+            lifecycleOwner = this@SearchResultFragment
+            viewModel = this@SearchResultFragment.viewModel
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getArgs()
+        setupToolbar()
+        setupAdapter()
+        subscribeToObservable()
+    }
+
+    private fun getArgs() {
+        val args = arguments?.let { SearchResultFragmentArgs.fromBundle(it) }
+        args?.let {
+            binding.title = it.title
+            viewModel.fetchTravelListWithQuery(it.query)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_result, container, false)
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+        binding.toolbar.apply {
+            navigationIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.blue4))
+            setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setupAdapter() {
+        adapter = SearchResultAdapter { travel ->
+            val action = SearchResultFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvSearchResult.adapter = adapter
+    }
+
+    private fun subscribeToObservable() {
+        viewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
+            searchResult?.let {
+                if (it.isEmpty()) binding.tvNoResults.visibility = View.VISIBLE
+                else adapter.submitList(searchResult)
             }
+        }
+
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            if (uiState.isError) {
+                snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
+                    .setAnchorView(R.id.bottomNav)
+                    .setAction(R.string.retry) { viewModel.retry() }
+
+                snackbar!!.show()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNav()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        snackbar?.dismiss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        showBottomNav()
     }
 }
