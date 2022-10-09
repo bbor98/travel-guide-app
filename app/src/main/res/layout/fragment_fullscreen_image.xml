@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.fullscreenimage.FullscreenImageFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="isFullscreen"
+            type="Boolean" />
+
+        <variable
+            name="imageNumber"
+            type="String" />
+
+    </data>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/black"
+        tools:context=".presentation.ui.fullscreenimage.FullscreenImageFragment">
 
-</FrameLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpImages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <FrameLayout
+            android:id="@+id/btClose"
+            isVisible="@{!isFullscreen}"
+            android:layout_width="@dimen/bookmark_size"
+            android:layout_height="@dimen/bookmark_size"
+            android:layout_margin="@dimen/margin_medium">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@drawable/bg_bookmark"
+                android:foreground="?selectableItemBackground" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_close" />
+
+        </FrameLayout>
+
+        <TextView
+            isVisible="@{!isFullscreen}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="16dp"
+            android:text="@{imageNumber}"
+            android:textColor="@color/white"
+            tools:text="1/10" />
+
+    </FrameLayout>
+
+</layout>

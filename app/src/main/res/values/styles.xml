@@ -64,4 +64,10 @@
         <item name="android:textColor">@color/blue</item>
         <item name="android:textSize">@dimen/text_normal</item>
     </style>
+
+    <style name="DetailImageShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">@dimen/detail_image_radius</item>
+        <item name="cornerSizeBottomRight">@dimen/detail_image_radius</item>
+    </style>
 </resources>

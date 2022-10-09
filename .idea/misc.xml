@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_nav_item.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.2805" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_button.xml" value="0.2805" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_image_list.xml" value="0.196" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_nav_menu_item.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_nav_menu_selected.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/bg_rounded_pink.xml" value="0.2815" />
@@ -33,6 +34,7 @@
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_home.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_outline_search.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/ic_time.xml" value="0.2805" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/item_fullscreen_image.xml" value="0.2805" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_manu_icon_tint.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_guide.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/nav_menu_home.xml" value="0.2815" />
@@ -42,11 +44,15 @@
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_search.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/drawable/selector_trip.xml" value="0.2815" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_fullscreen_image.xml" value="0.14035087719298245" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_guide.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_home.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_search.xml" value="0.37604166666666666" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/fragment_trip.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_deal.xml" value="0.5" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_fullscreen_image.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_image.xml" value="0.23783783783783785" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_might_need.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_nearby.xml" value="0.5" />
         <entry key="..\:/Users/Bora/AndroidStudioProjects/TravelGuideApp/app/src/main/res/layout/item_top_dest.xml" value="0.365625" />

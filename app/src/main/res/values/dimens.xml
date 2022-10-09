@@ -26,7 +26,7 @@
     <dimen name="text_normal">16sp</dimen>
     <dimen name="text_small">14sp</dimen>
 
-    <dimen name="banner_height">455dp</dimen>
+    <dimen name="banner_height">456dp</dimen>
     <dimen name="banner_button_card_size">64dp</dimen>
     <dimen name="banner_button_image_size">40dp</dimen>
 
@@ -50,6 +50,11 @@
     <dimen name="item_top_pick_width">256dp</dimen>
     <dimen name="item_top_pick_height">272dp</dimen>
     <dimen name="item_top_pick_image_height">160dp</dimen>
+
     <dimen name="guide_chip_group_height">40dp</dimen>
     <dimen name="chip_icon_start_padding">4dp</dimen>
+
+    <dimen name="detail_image_size">56dp</dimen>
+    <dimen name="detail_image_radius">56dp</dimen>
+    <dimen name="detail_image_list_radius">16dp</dimen>
 </resources>

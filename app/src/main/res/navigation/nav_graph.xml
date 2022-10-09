@@ -51,8 +51,11 @@
         android:label="fragment_fullscreen_image"
         tools:layout="@layout/fragment_fullscreen_image" >
         <argument
-            android:name="imageUrl"
-            app:argType="string" />
+            android:name="imageList"
+            app:argType="com.borabor.travelguideapp.domain.model.Image[]" />
+        <argument
+            android:name="imagePosition"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
