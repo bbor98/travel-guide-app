@@ -44,7 +44,9 @@ class HomeViewModel @Inject constructor(private val getTravelList: GetTravelList
     }
 
     fun filterDeals(filterBy: String) {
-        _travelList.value = if (filterBy == "all") responseData else responseData.filter { it.category == filterBy }
+        _travelList.value =
+            if (filterBy == "all") responseData.filter { it.category == "flight" || it.category == "hotel" || it.category == "transportation" }
+            else responseData.filter { it.category == filterBy }
     }
 
     fun retry() {
