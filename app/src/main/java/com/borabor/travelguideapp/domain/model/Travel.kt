@@ -8,12 +8,12 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Travel(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val primaryKey: Int = 0,
     val id: String,
     val category: String,
     val city: String,
     val country: String,
-    val dateCreated: Long? = null,
     val description: String,
     val images: List<Image>,
     val isBookmark: Boolean,

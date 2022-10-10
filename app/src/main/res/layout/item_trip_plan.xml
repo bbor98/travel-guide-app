@@ -19,11 +19,11 @@
 
         <variable
             name="imageCount"
-            type="String" />
+            type="Integer" />
 
         <variable
             name="tripLength"
-            type="String" />
+            type="Integer" />
 
         <variable
             name="isTrips"
@@ -118,7 +118,7 @@
             android:drawablePadding="4dp"
             android:fontFamily="@font/source_sans_pro_regular"
             android:gravity="center"
-            android:text="@{imageCount}"
+            android:text="@{isTrips ? @plurals/image_count(imageCount, imageCount) : ``}"
             android:textColor="@color/white2"
             android:textSize="@dimen/text_normal"
             app:drawableStartCompat="@drawable/ic_image"
@@ -126,7 +126,7 @@
             tools:text="4 images" />
 
         <TextView
-            isVisible="@{isTrips}"
+            isVisible="@{isTrips &amp;&amp; tripLength > 0L}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -134,7 +134,7 @@
             android:drawablePadding="4dp"
             android:fontFamily="@font/source_sans_pro_regular"
             android:gravity="center"
-            android:text="@{tripLength}"
+            android:text="@{isTrips ? @plurals/trip_length(tripLength, tripLength) : ``}"
             android:textColor="@color/white2"
             android:textSize="@dimen/text_normal"
             app:drawableStartCompat="@drawable/ic_time"

@@ -12,9 +12,9 @@
     </data>
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context=".presentation.ui.trip.TripFragment">
 
@@ -64,7 +64,7 @@
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/margin_medium"
                 android:paddingEnd="@dimen/margin_medium"
-                android:paddingBottom="96dp"
+                android:paddingBottom="@{viewModel.tabPosition == 0 ? @dimen/trips_padding_bottom : @dimen/bookmark_padding_bottom}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <include
@@ -73,12 +73,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"
-                app:isError="@{viewModel.uiState.error}"
-                app:isLoading="@{viewModel.uiState.loading}" />
+                app:isError="@{viewModel.uiState.error &amp;&amp; viewModel.tabPosition == 1}"
+                app:isLoading="@{viewModel.uiState.loading &amp;&amp; viewModel.tabPosition == 1}" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddTrip"
+                isVisible="@{viewModel.tabPosition == 0}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"

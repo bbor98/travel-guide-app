@@ -33,7 +33,20 @@
     <string name="pick_start_date">Pick a start date</string>
     <string name="end_date">End Date</string>
     <string name="pick_end_date">Pick an end date</string>
+    <string name="empty_dates">Set dates to add the trip</string>
+    <string name="invalid_dates">Please enter valid dates</string>
     <string name="add_trip">Add Trip</string>
+
+    <plurals name="image_count">
+        <item quantity="zero">No image</item>
+        <item quantity="one">1 image</item>
+        <item quantity="other">%d images</item>
+    </plurals>
+
+    <plurals name="trip_length">
+        <item quantity="one">1 day trip</item>
+        <item quantity="other">%d days trip</item>
+    </plurals>
 
     <string name="might_need_these">MIGHT NEED THESE</string>
     <string name="top_pick_articles">TOP-PICK ARTICLES</string>

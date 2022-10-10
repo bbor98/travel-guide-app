@@ -19,6 +19,7 @@ import com.borabor.travelguideapp.databinding.FragmentTripBinding
 import com.borabor.travelguideapp.databinding.LayoutBottomSheetBinding
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
+import com.borabor.travelguideapp.util.calculateDaysBetweenDates
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -37,14 +38,24 @@ class TripFragment : Fragment() {
     private val adapterTrip = TripPlanAdapter(true, { viewModel.removeTrip(it) }) { travel ->
         val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
         findNavController().navigate(action)
-    }
+    }/*.apply {
+        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                binding.rvTripPlan.scrollToPosition(0)
+            }
+        })
+    }*/
 
     private val adapterBookmark = TripPlanAdapter(false, { viewModel.deleteBookmark(it.id) }) { travel ->
         val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
         findNavController().navigate(action)
-    }
-
-    private var tabPosition = 0
+    }/*.apply {
+        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                binding.rvTripPlan.scrollToPosition(0)
+            }
+        })
+    }*/
 
     private var snackbar: Snackbar? = null
 
@@ -58,19 +69,21 @@ class TripFragment : Fragment() {
             lifecycleOwner = this@TripFragment
             viewModel = this@TripFragment.viewModel
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.rvTripPlan.adapter = if (viewModel.tabPosition.value == 0) adapterTrip else adapterBookmark
+
         setupTabLayout()
-        binding.rvTripPlan.adapter = adapterTrip
         setupBottomSheetDialog()
         subscribeToObservables()
 
         binding.fabAddTrip.setOnClickListener {
-            viewModel.fetchTravelList(false)
+            viewModel.fetchTravelList()
             bottomSheetDialog.show()
         }
     }
@@ -95,12 +108,25 @@ class TripFragment : Fragment() {
             }
 
             btAddTrip.setOnClickListener {
-                trip = trip.copy(
-                    dateCreated = System.currentTimeMillis(),
-                    schedule = "${tvStartDate.text} - ${tvEndDate.text}"
-                )
+                if (tvStartDate.text == getString(R.string.pick_start_date) || tvEndDate.text == getString(R.string.pick_end_date)) {
+                    Toast.makeText(requireContext(), getString(R.string.empty_dates), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val schedule = "${tvStartDate.text} - ${tvEndDate.text}"
+
+                if (schedule.calculateDaysBetweenDates() <= 0) {
+                    Toast.makeText(requireContext(), getString(R.string.invalid_dates), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                trip = trip.copy(schedule = schedule)
 
                 viewModel.addTrip(trip)
+                viewModel.fetchTripList()
+
+                binding.rvTripPlan.scrollToPosition(0)
+
                 bottomSheetDialog.dismiss()
             }
         }
@@ -145,26 +171,22 @@ class TripFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.tlTripPlan.getTabAt(tabPosition)?.select()
+        binding.tlTripPlan.getTabAt(viewModel.tabPosition.value!!)?.select()
         binding.tlTripPlan.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
-                        binding.fabAddTrip.visibility = View.VISIBLE
-                        binding.apiResponseState.root.visibility = View.GONE
                         binding.rvTripPlan.adapter = adapterTrip
                         viewModel.fetchTripList()
                     }
                     1 -> {
-                        binding.fabAddTrip.visibility = View.GONE
-                        binding.apiResponseState.root.visibility = View.VISIBLE
                         binding.rvTripPlan.adapter = adapterBookmark
-                        viewModel.fetchTravelList(true)
+                        viewModel.fetchBookmarkList()
                     }
                 }
 
                 binding.rvTripPlan.scrollToPosition(0)
-                tabPosition = tab?.position ?: 0
+                viewModel.setTabPosition(tab!!.position)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -173,15 +195,18 @@ class TripFragment : Fragment() {
     }
 
     private fun subscribeToObservables() {
-        viewModel.tripList.observe(viewLifecycleOwner) { list ->
-            adapterTrip.submitList(list)
+        viewModel.tripList.observe(viewLifecycleOwner) { tripList ->
+            adapterTrip.submitList(tripList)
         }
 
-        viewModel.travelList.observe(viewLifecycleOwner) { list ->
-            adapterBookmark.submitList(list)
+        viewModel.travelList.observe(viewLifecycleOwner) { allTravelList ->
             if (this::bottomSheetBinding.isInitialized) {
-                setupBottomSheetSpinner(list)
+                setupBottomSheetSpinner(allTravelList)
             }
+        }
+
+        viewModel.bookmarkList.observe(viewLifecycleOwner) { bookmarkList ->
+            adapterBookmark.submitList(bookmarkList)
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
@@ -199,16 +224,9 @@ class TripFragment : Fragment() {
         }
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        savedInstanceState?.let {
-            tabPosition = it.getInt(TAB_POSITION)
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(TAB_POSITION, tabPosition)
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.tabPosition.value == 1) viewModel.fetchBookmarkList()
     }
 
     override fun onPause() {
@@ -219,9 +237,5 @@ class TripFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    companion object {
-        private const val TAB_POSITION = "tab_position"
     }
 }

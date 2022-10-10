@@ -9,6 +9,7 @@ import com.borabor.travelguideapp.domain.usecase.*
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +22,17 @@ class TripViewModel @Inject constructor(
     private val updateBookmark: UpdateBookmark
 ) : ViewModel() {
 
+    private val _tabPosition = MutableLiveData(0)
+    val tabPosition: LiveData<Int> = _tabPosition
+
     private val _tripList = MutableLiveData(emptyList<Travel>())
     val tripList: LiveData<List<Travel>> = _tripList
 
     private val _travelList = MutableLiveData(emptyList<Travel>())
     val travelList: LiveData<List<Travel>> = _travelList
+
+    private val _bookmarkList = MutableLiveData(emptyList<Travel>())
+    val bookmarkList: LiveData<List<Travel>> = _bookmarkList
 
     private val _bookmarkState = MutableLiveData(UiState.successState())
     val bookmarkState: LiveData<UiState> = _bookmarkState
@@ -35,6 +42,10 @@ class TripViewModel @Inject constructor(
 
     init {
         fetchTripList()
+    }
+
+    fun setTabPosition(tabPosition: Int) {
+        _tabPosition.value = tabPosition
     }
 
     fun fetchTripList() {
@@ -47,27 +58,39 @@ class TripViewModel @Inject constructor(
 
     fun addTrip(trip: Travel) {
         viewModelScope.launch {
-            insertTrip(trip)
+            coroutineScope { insertTrip(trip) }
+            fetchTripList()
         }
     }
 
     fun removeTrip(trip: Travel) {
         viewModelScope.launch {
-            deleteTrip(trip)
+            coroutineScope { deleteTrip(trip) }
+            fetchTripList()
         }
     }
 
-    fun fetchTravelList(showOnlyBookmarks: Boolean) {
+    fun fetchTravelList() {
         viewModelScope.launch {
             getTravelList().collect { response ->
                 when (response) {
                     is Resource.Success -> {
-                        _travelList.value =
-                            if (showOnlyBookmarks) response.data.filter { it.isBookmark }
-                            else response.data.filter {
-                                it.category == "hotel" || it.category == "topdestination" || it.category == "nearby"
-                            }
+                        _travelList.value = response.data.filter {
+                            it.category == "hotel" || it.category == "topdestination" || it.category == "nearby" || it.category == "mightneed"
+                        }
+                    }
+                    is Resource.Error -> {}
+                }
+            }
+        }
+    }
 
+    fun fetchBookmarkList() {
+        viewModelScope.launch {
+            getTravelList().collect { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        _bookmarkList.value = response.data.filter { it.isBookmark }
                         _uiState.value = UiState.successState()
                     }
                     is Resource.Error -> _uiState.value = UiState.errorState(response.message)
@@ -78,20 +101,16 @@ class TripViewModel @Inject constructor(
 
     fun deleteBookmark(id: String) {
         viewModelScope.launch {
-            travelList.value?.find { it.id == id }?.let { travel ->
-                updateBookmark(id, false).collect { response ->
-                    when (response) {
-                        is Resource.Success -> {
-                            val updatedList = travelList.value?.map { travel ->
-                                if (travel.id == id) travel.copy(isBookmark = response.data.isBookmark)
-                                else travel
-                            }
+            updateBookmark(id, false).collect { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        val updatedList = _bookmarkList.value?.toMutableList()
+                        updatedList?.remove(response.data.copy(isBookmark = true))
 
-                            _travelList.value = updatedList
-                            _bookmarkState.value = UiState.successState()
-                        }
-                        is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
+                        _bookmarkList.value = updatedList
+                        _bookmarkState.value = UiState.successState()
                     }
+                    is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
                 }
             }
         }
@@ -99,6 +118,6 @@ class TripViewModel @Inject constructor(
 
     fun retry() {
         _uiState.value = UiState.loadingState()
-        fetchTravelList(true)
+        fetchBookmarkList()
     }
 }
