@@ -60,6 +60,8 @@ class DetailFragment : Fragment() {
             }
 
             btBookmark.setOnClickListener {
+                binding.btBookmark.visibility = View.GONE
+                binding.pbLoading.visibility = View.VISIBLE
                 viewModel.bookmark(travel!!.id, travel!!.isBookmark)
             }
         }
@@ -67,7 +69,13 @@ class DetailFragment : Fragment() {
 
     private fun subscribeToObservable() {
         viewModel.isBookmark.observe(viewLifecycleOwner) { isBookmark ->
-            isBookmark?.let { binding.isBookmark = it }
+            isBookmark?.let {
+                binding.apply {
+                    travel = travel?.copy(isBookmark = it)
+                    pbLoading.visibility = View.GONE
+                    btBookmark.visibility = View.VISIBLE
+                }
+            }
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->

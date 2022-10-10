@@ -13,10 +13,6 @@
             name="imagePosition"
             type="Integer" />
 
-        <variable
-            name="isBookmark"
-            type="Boolean" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,7 +133,17 @@
             android:id="@+id/btBookmark"
             style="@style/AddButton"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@{isBookmark ? @string/remove_bookmark : @string/add_bookmark}"
+            android:text="@{travel.isBookmark ? @string/remove_bookmark : @string/add_bookmark}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:indeterminateTint="@color/pink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
