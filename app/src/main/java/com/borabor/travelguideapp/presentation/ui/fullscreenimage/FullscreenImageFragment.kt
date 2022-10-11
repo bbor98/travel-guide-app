@@ -25,7 +25,7 @@ class FullscreenImageFragment : BaseFragment<FragmentFullscreenImageBinding>(R.l
 
         getArgs()
 
-        binding.btClose.setOnClickListener {
+        binding.btClose.root.setOnClickListener {
             findNavController().navigateUp()
         }
     }

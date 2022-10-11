@@ -18,10 +18,10 @@ class TopPickAdapter(
 ) : ListAdapter<Travel, TopPickAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(val view: ItemTopPickBinding) : RecyclerView.ViewHolder(view.root) {
         init {
-            view.btBookmark.setOnClickListener {
+            view.btBookmark.root.setOnClickListener {
                 onBookmarkClicked(
-                    view.ivBookmark,
-                    view.pbLoading,
+                    view.btBookmark.imageView,
+                    view.btBookmark.progressBar,
                     getItem(adapterPosition).id
                 )
             }

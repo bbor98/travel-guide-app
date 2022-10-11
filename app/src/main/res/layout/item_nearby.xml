@@ -49,36 +49,12 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <include
             android:id="@+id/btBookmark"
-            android:layout_width="@dimen/round_button_size"
-            android:layout_height="@dimen/round_button_size"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/margin_small">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.2"
-                android:background="@drawable/bg_round_button"
-                android:foreground="?selectableItemBackground" />
-
-            <ImageView
-                android:id="@+id/ivBookmark"
-                tint="@{travel.isBookmark ? @color/pink : @color/white2}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@{travel.isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
-
-            <ProgressBar
-                android:id="@+id/pbLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="@color/pink"
-                android:visibility="gone" />
-
-        </FrameLayout>
+            style="@style/RoundButton"
+            layout="@layout/layout_round_button"
+            app:icon="@{travel.isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}"
+            app:tint="@{travel.isBookmark ? @color/pink : @color/white2}" />
 
     </androidx.cardview.widget.CardView>
 

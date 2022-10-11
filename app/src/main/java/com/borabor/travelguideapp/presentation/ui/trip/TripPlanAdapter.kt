@@ -21,10 +21,10 @@ class TripPlanAdapter(
 
     inner class ViewHolder(val view: ItemTripPlanBinding) : RecyclerView.ViewHolder(view.root) {
         init {
-            view.btDelete.setOnClickListener {
+            view.btDelete.root.setOnClickListener {
                 onDeleteClicked(
-                    view.ivDelete,
-                    view.pbLoading,
+                    view.btDelete.imageView,
+                    view.btDelete.progressBar,
                     list[adapterPosition]
                 )
             }

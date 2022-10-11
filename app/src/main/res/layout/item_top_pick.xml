@@ -24,11 +24,11 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        app:cardBackgroundColor="@color/white2"
         android:layout_width="@dimen/item_top_pick_width"
         android:layout_height="@dimen/item_top_pick_height"
         android:layout_marginEnd="@dimen/margin_small"
         android:foreground="?selectableItemBackground"
+        app:cardBackgroundColor="@color/white2"
         app:cardCornerRadius="@dimen/radius_medium"
         app:cardElevation="@dimen/card_elevation">
 
@@ -48,36 +48,12 @@
                     android:scaleType="centerCrop"
                     tools:src="@drawable/ic_launcher_background" />
 
-                <FrameLayout
+                <include
                     android:id="@+id/btBookmark"
-                    android:layout_width="@dimen/round_button_size"
-                    android:layout_height="@dimen/round_button_size"
-                    android:layout_gravity="end"
-                    android:layout_margin="@dimen/margin_small">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:alpha="0.2"
-                        android:background="@drawable/bg_round_button"
-                        android:foreground="?selectableItemBackground" />
-
-                    <ImageView
-                        android:id="@+id/ivBookmark"
-                        tint="@{isBookmark ? @color/pink : @color/white2}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
-
-                    <ProgressBar
-                        android:id="@+id/pbLoading"
-                        android:visibility="gone"
-                        android:indeterminateTint="@color/pink"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </FrameLayout>
+                    style="@style/RoundButton"
+                    layout="@layout/layout_round_button"
+                    app:icon="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}"
+                    app:tint="@{isBookmark ? @color/pink : @color/white2}" />
 
             </FrameLayout>
 
@@ -94,7 +70,6 @@
                 tools:text="TITLE" />
 
             <TextView
-                android:text="@{description}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
@@ -102,6 +77,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:maxLines="2"
+                android:text="@{description}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/title_small"
                 tools:text="Description" />

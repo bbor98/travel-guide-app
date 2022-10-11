@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -27,27 +28,13 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
-        <FrameLayout
+        <include
             android:id="@+id/btClose"
-            isVisible="@{!isFullscreen}"
-            android:layout_width="@dimen/round_button_size"
-            android:layout_height="@dimen/round_button_size"
-            android:layout_margin="@dimen/margin_medium">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.2"
-                android:background="@drawable/bg_round_button"
-                android:foreground="?selectableItemBackground" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_close" />
-
-        </FrameLayout>
+            style="@style/RoundButtonBack"
+            layout="@layout/layout_round_button"
+            app:hide="@{isFullscreen}"
+            app:icon="@{@drawable/ic_close}"
+            app:tint="@{@color/white}" />
 
         <TextView
             isVisible="@{!isFullscreen}"

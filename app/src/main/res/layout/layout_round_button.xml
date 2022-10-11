@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="hide"
+            type="Boolean" />
+
+        <variable
+            name="icon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="tint"
+            type="Integer" />
+
+    </data>
+
+    <FrameLayout
+        isVisible="@{!hide}"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.2"
+            android:background="@drawable/bg_round_button"
+            android:foreground="?selectableItemBackground" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            tint="@{tint}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@{icon}" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@{tint}"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</layout>

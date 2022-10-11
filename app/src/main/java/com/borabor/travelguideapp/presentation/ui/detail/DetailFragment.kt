@@ -39,7 +39,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     private fun setupViewClickListeners() {
         binding.apply {
-            btBack.setOnClickListener {
+            btBack.root.setOnClickListener {
                 findNavController().navigateUp()
             }
 

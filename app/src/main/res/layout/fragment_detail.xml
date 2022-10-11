@@ -39,26 +39,12 @@
                 app:shapeAppearanceOverlay="@style/DetailImageShape"
                 tools:src="@drawable/ic_launcher_background" />
 
-            <FrameLayout
+            <include
                 android:id="@+id/btBack"
-                android:layout_width="@dimen/round_button_size"
-                android:layout_height="@dimen/round_button_size"
-                android:layout_margin="@dimen/margin_medium">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.2"
-                    android:background="@drawable/bg_round_button"
-                    android:foreground="?selectableItemBackground" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_arrow_back" />
-
-            </FrameLayout>
+                style="@style/RoundButtonBack"
+                layout="@layout/layout_round_button"
+                app:icon="@{@drawable/ic_arrow_back}"
+                app:tint="@{@color/white}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvImages"
