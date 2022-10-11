@@ -12,7 +12,7 @@ class BookmarkRepositoryImpl @Inject constructor(
     private val safeApiCall: SafeApiCall
 ) : BookmarkRepository {
     override suspend fun getBookmarks() = safeApiCall.execute {
-        api.getTravelList("bookmark")
+        api.getTravelList(isBookmark = true)
     }
 
     override suspend fun updateBookmark(id: String, isBookmark: Boolean) = safeApiCall.execute {

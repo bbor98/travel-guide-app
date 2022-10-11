@@ -6,7 +6,10 @@ import retrofit2.http.*
 
 interface TravelApi {
     @GET("travel_list")
-    suspend fun getTravelList(@Query("category") category: String? = null): List<Travel>
+    suspend fun getTravelList(
+        @Query("category") category: String? = null,
+        @Query("isBookmark") isBookmark: Boolean? = null
+    ): List<Travel>
 
     @GET("guide_categories")
     suspend fun getGuideCategories(): List<Category>
