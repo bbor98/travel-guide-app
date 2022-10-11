@@ -36,8 +36,8 @@ class TripViewModel @Inject constructor(
     private val _bookmarkList = MutableLiveData(emptyList<Travel>())
     val bookmarkList: LiveData<List<Travel>> = _bookmarkList
 
-    private val _bookmarkState = MutableLiveData(UiState.successState())
-    val bookmarkState: LiveData<UiState> = _bookmarkState
+    private val _bookmarkState = MutableLiveData<UiState?>(null)
+    val bookmarkState: LiveData<UiState?> = _bookmarkState
 
     private val _uiState = MutableLiveData(UiState.loadingState())
     val uiState: LiveData<UiState> = _uiState
@@ -102,6 +102,8 @@ class TripViewModel @Inject constructor(
     }
 
     fun deleteBookmark(id: String) {
+        _bookmarkState.value = UiState.loadingState()
+
         viewModelScope.launch {
             updateBookmark(id, false).collect { response ->
                 when (response) {

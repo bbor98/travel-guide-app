@@ -34,8 +34,8 @@ class GuideViewModel @Inject constructor(
     private val _topPickList = MutableLiveData(emptyList<Travel>())
     val topPickList: LiveData<List<Travel>> = _topPickList
 
-    private val _bookmarkState = MutableLiveData(UiState.successState())
-    val bookmarkState: LiveData<UiState> = _bookmarkState
+    private val _bookmarkState = MutableLiveData<UiState?>(null)
+    val bookmarkState: LiveData<UiState?> = _bookmarkState
 
     private val _uiState = MutableLiveData(UiState.loadingState())
     val uiState: LiveData<UiState> = _uiState
@@ -66,6 +66,8 @@ class GuideViewModel @Inject constructor(
     }
 
     fun updateBookmark(id: String) {
+        _bookmarkState.value = UiState.loadingState()
+
         viewModelScope.launch {
             topPickList.value?.find { it.id == id }?.let { travel ->
                 updateBookmark(id, !travel.isBookmark).collect { response ->

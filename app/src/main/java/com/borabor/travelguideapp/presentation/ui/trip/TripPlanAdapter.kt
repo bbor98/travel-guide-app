@@ -3,6 +3,8 @@ package com.borabor.travelguideapp.presentation.ui.trip
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.borabor.travelguideapp.R
@@ -12,7 +14,7 @@ import com.borabor.travelguideapp.util.calculateDaysBetweenDates
 
 class TripPlanAdapter(
     private val isTrips: Boolean,
-    private val onIconClicked: (Travel) -> Unit,
+    private val onDeleteClicked: (ImageView, ProgressBar, Travel) -> Unit,
     private val onItemClicked: (Travel) -> Unit
 ) : RecyclerView.Adapter<TripPlanAdapter.ViewHolder>() {
 
@@ -21,7 +23,11 @@ class TripPlanAdapter(
     inner class ViewHolder(val view: ItemTripPlanBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.btDelete.setOnClickListener {
-                onIconClicked(list[adapterPosition])
+                onDeleteClicked(
+                    view.ivDelete,
+                    view.pbLoading,
+                    list[adapterPosition]
+                )
             }
 
             view.root.setOnClickListener {

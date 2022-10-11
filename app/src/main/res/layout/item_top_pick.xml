@@ -63,11 +63,19 @@
                         android:foreground="?selectableItemBackground" />
 
                     <ImageView
+                        android:id="@+id/ivBookmark"
                         tint="@{isBookmark ? @color/pink : @color/white2}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
+
+                    <ProgressBar
+                        android:id="@+id/pbLoading"
+                        android:visibility="gone"
+                        android:indeterminateTint="@color/pink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </FrameLayout>
 

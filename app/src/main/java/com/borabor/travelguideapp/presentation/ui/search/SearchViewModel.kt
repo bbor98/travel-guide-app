@@ -28,8 +28,8 @@ class SearchViewModel @Inject constructor(
     private val _nearbyList = MutableLiveData(emptyList<Travel>())
     val nearbyList: LiveData<List<Travel>> = _nearbyList
 
-    private val _bookmarkState = MutableLiveData(UiState.successState())
-    val bookmarkState: LiveData<UiState> = _bookmarkState
+    private val _bookmarkState = MutableLiveData<UiState?>(null)
+    val bookmarkState: LiveData<UiState?> = _bookmarkState
 
     private val _uiState = MutableLiveData(UiState.loadingState())
     val uiState: LiveData<UiState> = _uiState
@@ -57,6 +57,8 @@ class SearchViewModel @Inject constructor(
     }
 
     fun bookmark(id: String, isBookmark: Boolean) {
+        _bookmarkState.value = UiState.loadingState()
+
         viewModelScope.launch {
             updateBookmark(id, !isBookmark).collect { response ->
                 when (response) {

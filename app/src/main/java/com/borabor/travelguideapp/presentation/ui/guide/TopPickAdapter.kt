@@ -2,6 +2,8 @@ package com.borabor.travelguideapp.presentation.ui.guide
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,13 +13,17 @@ import com.borabor.travelguideapp.databinding.ItemTopPickBinding
 import com.borabor.travelguideapp.domain.model.Travel
 
 class TopPickAdapter(
-    private val onBookmarkClicked: (String) -> Unit,
+    private val onBookmarkClicked: (ImageView, ProgressBar, String) -> Unit,
     private val onItemClicked: (Travel) -> Unit
 ) : ListAdapter<Travel, TopPickAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(val view: ItemTopPickBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.btBookmark.setOnClickListener {
-                onBookmarkClicked(getItem(adapterPosition).id)
+                onBookmarkClicked(
+                    view.ivBookmark,
+                    view.pbLoading,
+                    getItem(adapterPosition).id
+                )
             }
 
             view.root.setOnClickListener {

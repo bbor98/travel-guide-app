@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +17,7 @@ import com.borabor.travelguideapp.databinding.LayoutBottomSheetBinding
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
 import com.borabor.travelguideapp.util.calculateDaysBetweenDates
+import com.borabor.travelguideapp.util.handleBookmarkState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -35,27 +33,32 @@ class TripFragment : Fragment() {
 
     private val viewModel: TripViewModel by viewModels()
 
-    private val adapterTrip = TripPlanAdapter(true, { viewModel.removeTrip(it) }) { travel ->
+    private val adapterTrip = TripPlanAdapter(
+        isTrips = true,
+        onDeleteClicked = { _, _, travel ->
+            viewModel.removeTrip(travel)
+        })
+    { travel ->
         val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
         findNavController().navigate(action)
-    }/*.apply {
-        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                binding.rvTripPlan.scrollToPosition(0)
-            }
-        })
-    }*/
+    }
 
-    private val adapterBookmark = TripPlanAdapter(false, { viewModel.deleteBookmark(it.id) }) { travel ->
+    private val adapterBookmark = TripPlanAdapter(
+        isTrips = false,
+        onDeleteClicked = { ivDelete, pbLoading, travel ->
+            this.ivDelete = ivDelete
+            this.pbLoading = pbLoading
+
+            viewModel.deleteBookmark(travel.id)
+        })
+    { travel ->
         val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
         findNavController().navigate(action)
-    }/*.apply {
-        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                binding.rvTripPlan.scrollToPosition(0)
-            }
-        })
-    }*/
+    }
+
+
+    private lateinit var ivDelete: ImageView
+    private lateinit var pbLoading: ProgressBar
 
     private var snackbar: Snackbar? = null
 
@@ -210,7 +213,9 @@ class TripFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+            if (this::ivDelete.isInitialized && this::pbLoading.isInitialized) {
+                bookmarkState?.handleBookmarkState(this, ivDelete, pbLoading)
+            }
         }
     }
 

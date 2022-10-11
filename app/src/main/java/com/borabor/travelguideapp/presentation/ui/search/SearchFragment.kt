@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentSearchBinding
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
 import com.borabor.travelguideapp.util.checkQueryTextAndProceed
+import com.borabor.travelguideapp.util.handleBookmarkState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +29,9 @@ class SearchFragment : Fragment() {
 
     private lateinit var adapterTopDest: TopDestAdapter
     private lateinit var adapterNearby: NearbyAdapter
+
+    private lateinit var ivBookmark: ImageView
+    private lateinit var pbLoading: ProgressBar
 
     private var snackbar: Snackbar? = null
 
@@ -67,9 +72,13 @@ class SearchFragment : Fragment() {
 
         binding.rvTopDest.adapter = adapterTopDest
 
-        adapterNearby = NearbyAdapter({ id, isBookmark ->
+        adapterNearby = NearbyAdapter({ ivBookmark, pbLoading, id, isBookmark ->
+            this.ivBookmark = ivBookmark
+            this.pbLoading = pbLoading
+
             viewModel.bookmark(id, isBookmark)
-        }) { travel ->
+        })
+        { travel ->
             val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
             findNavController().navigate(action)
         }
@@ -95,7 +104,9 @@ class SearchFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+            if (this::ivBookmark.isInitialized && this::pbLoading.isInitialized) {
+                bookmarkState?.handleBookmarkState(this, ivBookmark, pbLoading)
+            }
         }
     }
 

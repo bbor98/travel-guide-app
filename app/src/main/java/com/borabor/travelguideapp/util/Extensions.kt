@@ -3,6 +3,8 @@ package com.borabor.travelguideapp.util
 import android.os.Build
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.borabor.travelguideapp.R
@@ -39,4 +41,19 @@ fun String?.calculateDaysBetweenDates(): Int {
     val date2: LocalDate? = LocalDate.parse(inputString?.last(), dtf)
 
     return Duration.between(date1?.atStartOfDay(), date2?.atStartOfDay()).toDays().toInt()
+}
+
+fun UiState.handleBookmarkState(fragment: Fragment, imageView: ImageView, progressBar: ProgressBar) {
+    if (isLoading) {
+        imageView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    } else if (isSuccess) {
+        imageView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+    } else if (isError) {
+        imageView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+
+        Toast.makeText(fragment.requireContext(), fragment.getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+    }
 }

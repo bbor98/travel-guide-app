@@ -6,20 +6,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="country"
-            type="String" />
-
-        <variable
-            name="city"
-            type="String" />
-
-        <variable
-            name="isBookmark"
-            type="Boolean" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
     </data>
 
@@ -36,7 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                loadImage="@{imageUrl}"
+                loadImage="@{travel.images[0].url}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -60,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@{city}"
+                android:text="@{travel.city}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/title_large"
@@ -71,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:text="@{country}"
+                android:text="@{travel.country}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/text_normal"
@@ -94,11 +82,19 @@
                 android:foreground="?selectableItemBackground" />
 
             <ImageView
-                tint="@{isBookmark ? @color/pink : @color/white2}"
+                android:id="@+id/ivBookmark"
+                tint="@{travel.isBookmark ? @color/pink : @color/white2}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
+                android:src="@{travel.isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}" />
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/pink"
+                android:visibility="gone" />
 
         </FrameLayout>
 

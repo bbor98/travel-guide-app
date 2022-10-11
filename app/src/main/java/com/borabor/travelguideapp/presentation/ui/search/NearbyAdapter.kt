@@ -2,6 +2,8 @@ package com.borabor.travelguideapp.presentation.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,13 +13,18 @@ import com.borabor.travelguideapp.databinding.ItemNearbyBinding
 import com.borabor.travelguideapp.domain.model.Travel
 
 class NearbyAdapter(
-    private val onBookmarkClicked: (String, Boolean) -> Unit,
+    private val onBookmarkClicked: (ImageView, ProgressBar, String, Boolean) -> Unit,
     private val onItemClicked: (Travel) -> Unit
 ) : ListAdapter<Travel, NearbyAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(val view: ItemNearbyBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.btBookmark.setOnClickListener {
-                onBookmarkClicked(getItem(adapterPosition).id, getItem(adapterPosition).isBookmark)
+                onBookmarkClicked(
+                    view.ivBookmark,
+                    view.pbLoading,
+                    getItem(adapterPosition).id,
+                    getItem(adapterPosition).isBookmark
+                )
             }
 
             view.root.setOnClickListener {
@@ -31,13 +38,7 @@ class NearbyAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.view.apply {
-            imageUrl = item.images.first().url
-            country = item.country
-            city = item.city
-            isBookmark = item.isBookmark
-        }
+        holder.view.travel = getItem(position)
     }
 
     object DiffCallback : DiffUtil.ItemCallback<Travel>() {
