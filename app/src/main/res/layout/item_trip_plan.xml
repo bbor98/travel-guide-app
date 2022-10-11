@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.2"
-                android:background="@drawable/bg_bookmark"
+                android:background="@drawable/bg_round_button"
                 android:foreground="?selectableItemBackground" />
 
             <ImageView

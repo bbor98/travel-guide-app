@@ -80,7 +80,7 @@
             android:textColor="@color/blue4"
             android:textSize="@dimen/title_medium"
             app:drawableTint="@color/blue4"
-            app:drawableTopCompat="@drawable/ic_search_off" />
+            app:drawableTopCompat="@drawable/ic_search_no_result" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
