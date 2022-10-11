@@ -73,7 +73,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                     binding.btBookmark.visibility = View.VISIBLE
                     binding.pbLoading.visibility = View.GONE
 
-                    Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.bookmark_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -16,7 +16,7 @@ fun EditText.checkQueryTextAndProceed(fragment: Fragment, action: (String) -> Un
     val query = text.toString().lowercase()
 
     if (query.length < 3) {
-        Toast.makeText(fragment.requireContext(), fragment.getText(R.string.error_search_query), Toast.LENGTH_SHORT).show()
+        Toast.makeText(fragment.requireContext(), fragment.getText(R.string.search_query_error), Toast.LENGTH_SHORT).show()
         return
     } else action(query)
 }
@@ -45,6 +45,6 @@ fun UiState.handleBookmarkState(fragment: Fragment, imageView: ImageView, progre
         imageView.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
 
-        Toast.makeText(fragment.requireContext(), fragment.getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+        Toast.makeText(fragment.requireContext(), fragment.getString(R.string.bookmark_error), Toast.LENGTH_SHORT).show()
     }
 }
