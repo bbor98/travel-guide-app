@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,11 +11,9 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/CardViewHorizontal"
         android:layout_width="@dimen/detail_image_size"
-        android:layout_height="@dimen/detail_image_size"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="@dimen/radius_large">
+        android:layout_height="@dimen/detail_image_size">
 
         <ImageView
             loadImage="@{imageUrl}"

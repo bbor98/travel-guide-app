@@ -20,12 +20,9 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/CardViewHorizontal"
         android:layout_width="@dimen/item_top_dest_width"
-        android:layout_height="@dimen/item_top_dest_height"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="@dimen/radius_medium"
-        app:cardElevation="@dimen/card_elevation">
+        android:layout_height="@dimen/item_top_dest_height">
 
         <include
             layout="@layout/layout_image_background"

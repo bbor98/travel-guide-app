@@ -18,12 +18,9 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/CardViewVertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_trip_plan_height"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:foreground="?selectableItemBackground"
-        app:cardCornerRadius="@dimen/radius_medium"
-        app:cardElevation="@dimen/card_elevation">
+        android:layout_height="@dimen/item_trip_plan_height">
 
         <include
             layout="@layout/layout_image_background"

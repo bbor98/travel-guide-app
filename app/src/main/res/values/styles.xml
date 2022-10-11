@@ -81,4 +81,20 @@
         <item name="android:textColor">@color/white2</item>
         <item name="android:textSize">@dimen/text_small</item>
     </style>
+
+    <style name="CardViewHorizontal">
+        <item name="android:layout_marginEnd">@dimen/margin_small</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
+
+    <style name="CardViewVertical">
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+    </style>
 </resources>
