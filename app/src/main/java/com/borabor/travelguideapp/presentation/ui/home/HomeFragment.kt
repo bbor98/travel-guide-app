@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         setupBannerButtons()
         setupTabLayout()
         setupAdapter()
-        subscribeToObservables()
+        subscribeToObservable()
 
         binding.apiResponseState.btRetry.setOnClickListener {
             viewModel.retryConnection {
@@ -83,25 +83,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.rvDeals.adapter = adapter
     }
 
-    private fun subscribeToObservables() {
+    private fun subscribeToObservable() {
         viewModel.dealList.observe(viewLifecycleOwner) { travelList ->
             adapter.submitList(travelList)
         }
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        savedInstanceState?.let {
-            tabPosition = it.getInt(TAB_POSITION)
-        }
+    override fun onResume() {
+        super.onResume()
+        tabPosition = viewModel.getTabPosition()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(TAB_POSITION, tabPosition)
-    }
-
-    companion object {
-        private const val TAB_POSITION = "tab_position"
+    override fun onPause() {
+        super.onPause()
+        viewModel.setTabPosition(tabPosition)
     }
 }

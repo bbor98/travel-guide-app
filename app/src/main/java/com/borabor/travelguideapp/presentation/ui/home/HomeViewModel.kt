@@ -19,6 +19,8 @@ class HomeViewModel @Inject constructor(private val getTravelList: GetTravelList
     private val _dealList = MutableLiveData(emptyList<Travel>())
     val dealList: LiveData<List<Travel>> = _dealList
 
+    private var responseData = emptyList<Travel>()
+
     init {
         fetchDealList()
     }
@@ -28,7 +30,8 @@ class HomeViewModel @Inject constructor(private val getTravelList: GetTravelList
             getTravelList(ListType.DEALS).collect { response ->
                 when (response) {
                     is Resource.Success -> {
-                        _dealList.value = response.data
+                        responseData = response.data
+                        _dealList.value = responseData
                         _uiState.value = UiState.successState()
                     }
                     is Resource.Error -> {
@@ -41,7 +44,15 @@ class HomeViewModel @Inject constructor(private val getTravelList: GetTravelList
 
     fun filterDeals(filterBy: String) {
         _dealList.value =
-            if (filterBy == "all") dealList.value
-            else dealList.value?.filter { it.category == filterBy }
+            if (filterBy == "all") responseData
+            else responseData.filter { it.category == filterBy }
     }
+
+    private var tabPosition = 0
+
+    fun setTabPosition(tabPosition: Int) {
+        this.tabPosition = tabPosition
+    }
+
+    fun getTabPosition() = tabPosition
 }
