@@ -41,7 +41,7 @@
         <item name="android:background">@drawable/bg_bottom_sheet</item>
     </style>
 
-    <style name="ShapeableImageView">
+    <style name="BottomSheetImageShape">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/bottom_sheet_radius</item>
         <item name="cornerSizeTopRight">@dimen/bottom_sheet_radius</item>
