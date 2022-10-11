@@ -159,7 +159,7 @@
                     android:id="@+id/apiResponseState"
                     layout="@layout/layout_api_response_state"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/home_api_response_state_height"
                     android:layout_gravity="center"
                     app:isError="@{viewModel.uiState.error}"
                     app:isLoading="@{viewModel.uiState.loading}" />

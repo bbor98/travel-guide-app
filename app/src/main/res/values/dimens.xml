@@ -69,4 +69,6 @@
     <dimen name="label_padding">6dp</dimen>
     <dimen name="label_margin_small">8dp</dimen>
     <dimen name="label_text_small">12sp</dimen>
+
+    <dimen name="home_api_response_state_height">172dp</dimen>
 </resources>
