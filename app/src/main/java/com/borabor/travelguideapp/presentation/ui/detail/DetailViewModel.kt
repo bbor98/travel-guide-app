@@ -21,15 +21,16 @@ class DetailViewModel @Inject constructor(private val updateBookmark: UpdateBook
     val bookmarkState: LiveData<UiState> = _bookmarkState
 
     fun bookmark(id: String, isBookmark: Boolean) {
-        val shouldAddBookmark = !isBookmark
         viewModelScope.launch {
-            updateBookmark(id, shouldAddBookmark).collect { response ->
+            updateBookmark(id, !isBookmark).collect { response ->
                 when (response) {
                     is Resource.Success -> {
                         _isBookmark.value = response.data.isBookmark
                         _bookmarkState.value = UiState.successState()
                     }
-                    is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
+                    is Resource.Error -> {
+                        _bookmarkState.value = UiState.errorState()
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.*
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ class TripViewModel @Inject constructor(
     private val insertTrip: InsertTrip,
     private val deleteTrip: DeleteTrip,
     private val getTravelList: GetTravelList,
+    private val getBookmarks: GetBookmarks,
     private val updateBookmark: UpdateBookmark
 ) : ViewModel() {
 
@@ -72,14 +74,14 @@ class TripViewModel @Inject constructor(
 
     fun fetchTravelList() {
         viewModelScope.launch {
-            getTravelList().collect { response ->
+            getTravelList(ListType.ALL).collect { response ->
                 when (response) {
                     is Resource.Success -> {
                         _travelList.value = response.data.filter {
                             it.category == "hotel" || it.category == "topdestination" || it.category == "nearby" || it.category == "mightneed"
                         }
                     }
-                    is Resource.Error -> {}
+                    is Resource.Error -> return@collect
                 }
             }
         }
@@ -87,13 +89,13 @@ class TripViewModel @Inject constructor(
 
     fun fetchBookmarkList() {
         viewModelScope.launch {
-            getTravelList().collect { response ->
+            getBookmarks().collect { response ->
                 when (response) {
                     is Resource.Success -> {
-                        _bookmarkList.value = response.data.filter { it.isBookmark }
+                        _bookmarkList.value = response.data
                         _uiState.value = UiState.successState()
                     }
-                    is Resource.Error -> _uiState.value = UiState.errorState(response.message)
+                    is Resource.Error -> _uiState.value = UiState.errorState()
                 }
             }
         }
@@ -110,7 +112,9 @@ class TripViewModel @Inject constructor(
                         _bookmarkList.value = updatedList
                         _bookmarkState.value = UiState.successState()
                     }
-                    is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
+                    is Resource.Error -> {
+                        _bookmarkState.value = UiState.errorState()
+                    }
                 }
             }
         }

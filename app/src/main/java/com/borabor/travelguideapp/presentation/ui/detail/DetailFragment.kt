@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentDetailBinding
 import com.borabor.travelguideapp.util.hideBottomNav
 import com.borabor.travelguideapp.util.showBottomNav
@@ -79,7 +80,7 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) Toast.makeText(requireContext(), bookmarkState.errorMessage, Toast.LENGTH_SHORT).show()
+            if (bookmarkState.isError) Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
         }
     }
 

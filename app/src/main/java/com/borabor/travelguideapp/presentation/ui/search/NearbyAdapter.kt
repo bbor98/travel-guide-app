@@ -11,13 +11,13 @@ import com.borabor.travelguideapp.databinding.ItemNearbyBinding
 import com.borabor.travelguideapp.domain.model.Travel
 
 class NearbyAdapter(
-    private val onBookmarkClicked: (String) -> Unit,
+    private val onBookmarkClicked: (String, Boolean) -> Unit,
     private val onItemClicked: (Travel) -> Unit
 ) : ListAdapter<Travel, NearbyAdapter.ViewHolder>(DiffCallback) {
     inner class ViewHolder(val view: ItemNearbyBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.btBookmark.setOnClickListener {
-                onBookmarkClicked(getItem(adapterPosition).id)
+                onBookmarkClicked(getItem(adapterPosition).id, getItem(adapterPosition).isBookmark)
             }
 
             view.root.setOnClickListener {

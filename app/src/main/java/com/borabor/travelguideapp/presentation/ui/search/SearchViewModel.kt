@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
 import com.borabor.travelguideapp.domain.usecase.UpdateBookmark
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,39 +35,42 @@ class SearchViewModel @Inject constructor(
     val uiState: LiveData<UiState> = _uiState
 
     init {
-        fetchTravelList()
+        fetchLists()
     }
 
-    private fun fetchTravelList() {
+    private fun fetchLists() {
+        combine(
+            getTravelList(ListType.TOP_DESTINATIONS),
+            getTravelList(ListType.NEARBY_ATTRACTIONS)
+        ) { topDestResponse, nearbyResponse ->
+            if (
+                topDestResponse is Resource.Success &&
+                nearbyResponse is Resource.Success
+            ) {
+                _topDestList.value = topDestResponse.data
+                _nearbyList.value = nearbyResponse.data
+                _uiState.value = UiState.successState()
+            } else {
+                _uiState.value = UiState.errorState()
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun bookmark(id: String, isBookmark: Boolean) {
         viewModelScope.launch {
-            getTravelList().collect { response ->
+            updateBookmark(id, !isBookmark).collect { response ->
                 when (response) {
                     is Resource.Success -> {
-                        _topDestList.value = response.data.filter { it.category == "topdestination" }
-                        _nearbyList.value = response.data.filter { it.category == "nearby" }.toMutableList()
-                        _uiState.value = UiState.successState()
-                    }
-                    is Resource.Error -> _uiState.value = UiState.errorState(response.message)
-                }
-            }
-        }
-    }
-
-    fun updateBookmark(id: String) {
-        viewModelScope.launch {
-            nearbyList.value?.find { it.id == id }?.let { travel ->
-                updateBookmark(id, !travel.isBookmark).collect { response ->
-                    when (response) {
-                        is Resource.Success -> {
-                            val updatedList = nearbyList.value?.map { travel ->
-                                if (travel.id == id) travel.copy(isBookmark = response.data.isBookmark)
-                                else travel
-                            }
-
-                            _nearbyList.value = updatedList
-                            _bookmarkState.value = UiState.successState()
+                        val updatedList = nearbyList.value?.map { travel ->
+                            if (travel.id == id) travel.copy(isBookmark = response.data.isBookmark)
+                            else travel
                         }
-                        is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
+
+                        _nearbyList.value = updatedList
+                        _bookmarkState.value = UiState.successState()
+                    }
+                    is Resource.Error -> {
+                        _bookmarkState.value = UiState.errorState()
                     }
                 }
             }
@@ -73,6 +79,6 @@ class SearchViewModel @Inject constructor(
 
     fun retry() {
         _uiState.value = UiState.loadingState()
-        fetchTravelList()
+        fetchLists()
     }
 }

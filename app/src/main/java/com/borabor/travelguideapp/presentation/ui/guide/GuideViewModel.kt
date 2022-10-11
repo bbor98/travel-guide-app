@@ -9,9 +9,12 @@ import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetGuideCategories
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
 import com.borabor.travelguideapp.domain.usecase.UpdateBookmark
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,44 +37,32 @@ class GuideViewModel @Inject constructor(
     private val _bookmarkState = MutableLiveData(UiState.successState())
     val bookmarkState: LiveData<UiState> = _bookmarkState
 
-    private val _travelUiState = MutableLiveData(UiState.loadingState())
-    val travelUiState: LiveData<UiState> = _travelUiState
-
-    private val _categoryUiState = MutableLiveData(UiState.loadingState())
-    val categoryUiState: LiveData<UiState> = _categoryUiState
+    private val _uiState = MutableLiveData(UiState.loadingState())
+    val uiState: LiveData<UiState> = _uiState
 
     init {
-        fetchTravelList()
-        fetchCategoryList()
+        fetchLists()
     }
 
-    private fun fetchTravelList() {
-        viewModelScope.launch {
-            getTravelList().collect { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        _mightNeedList.value = response.data.filter { it.category == "mightneed" }
-                        _topPickList.value = response.data.filter { it.category == "toppick" }
-                        _travelUiState.value = UiState.successState()
-                    }
-                    is Resource.Error -> _travelUiState.value = UiState.errorState(response.message)
-                }
+    private fun fetchLists() {
+        combine(
+            getTravelList(ListType.MIGHT_NEEDS),
+            getTravelList(ListType.TOP_PICK_ARTICLES),
+            getGuideCategories()
+        ) { mightNeedResponse, topPickResponse, guideCategoriesResponse ->
+            if (
+                mightNeedResponse is Resource.Success &&
+                topPickResponse is Resource.Success &&
+                guideCategoriesResponse is Resource.Success
+            ) {
+                _mightNeedList.value = mightNeedResponse.data
+                _topPickList.value = topPickResponse.data
+                _categoryList.value = guideCategoriesResponse.data
+                _uiState.value = UiState.successState()
+            } else {
+                _uiState.value = UiState.errorState()
             }
-        }
-    }
-
-    private fun fetchCategoryList() {
-        viewModelScope.launch {
-            getGuideCategories().collect { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        _categoryList.value = response.data
-                        _categoryUiState.value = UiState.successState()
-                    }
-                    is Resource.Error -> _categoryUiState.value = UiState.errorState(response.message)
-                }
-            }
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun updateBookmark(id: String) {
@@ -88,7 +79,9 @@ class GuideViewModel @Inject constructor(
                             _topPickList.value = updatedList
                             _bookmarkState.value = UiState.successState()
                         }
-                        is Resource.Error -> _bookmarkState.value = UiState.errorState(response.message)
+                        is Resource.Error -> {
+                            _bookmarkState.value = UiState.errorState()
+                        }
                     }
                 }
             }
@@ -96,7 +89,7 @@ class GuideViewModel @Inject constructor(
     }
 
     fun retry() {
-        _travelUiState.value = UiState.loadingState()
-        fetchTravelList()
+        _uiState.value = UiState.loadingState()
+        fetchLists()
     }
 }

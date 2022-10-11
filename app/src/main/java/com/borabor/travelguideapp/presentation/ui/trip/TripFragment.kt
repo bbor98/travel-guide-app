@@ -210,17 +210,7 @@ class TripFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) Toast.makeText(requireContext(), bookmarkState.errorMessage, Toast.LENGTH_SHORT).show()
-        }
-
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            if (uiState.isError) {
-                snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
-                    .setAnchorView(R.id.bottomNav)
-                    .setAction(R.string.retry) { viewModel.retry() }
-
-                snackbar!!.show()
-            }
+            if (bookmarkState.isError) Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
         }
     }
 

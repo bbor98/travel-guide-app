@@ -40,11 +40,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:paddingBottom="@dimen/margin_large"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingEnd="4dp"
+                    android:paddingBottom="@dimen/margin_large"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <include
@@ -52,8 +52,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
-                    app:isError="@{viewModel.travelUiState.error}"
-                    app:isLoading="@{viewModel.travelUiState.loading}" />
+                    app:isError="@{viewModel.uiState.error}"
+                    app:isLoading="@{viewModel.uiState.loading}" />
 
             </FrameLayout>
 
@@ -86,8 +86,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:isError="@{viewModel.categoryUiState.error}"
-                    app:isLoading="@{viewModel.categoryUiState.loading}" />
+                    app:isError="@{viewModel.uiState.error}"
+                    app:isLoading="@{viewModel.uiState.loading}" />
 
             </FrameLayout>
 
@@ -104,11 +104,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:paddingBottom="112dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingEnd="4dp"
+                    android:paddingBottom="112dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <include
@@ -116,8 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:isError="@{viewModel.travelUiState.error}"
-                    app:isLoading="@{viewModel.travelUiState.loading}" />
+                    app:isError="@{viewModel.uiState.error}"
+                    app:isLoading="@{viewModel.uiState.loading}" />
 
             </FrameLayout>
 

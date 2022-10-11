@@ -47,18 +47,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun subscribeToObservables() {
-        viewModel.travelList.observe(viewLifecycleOwner) { travelList ->
+        viewModel.dealList.observe(viewLifecycleOwner) { travelList ->
             adapter.submitList(travelList)
-        }
-
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            if (uiState.isError) {
-                snackbar = Snackbar.make(requireView(), uiState.errorMessage!!, Snackbar.LENGTH_INDEFINITE)
-                    .setAnchorView(R.id.bottomNav)
-                    .setAction(R.string.retry) { viewModel.retry() }
-
-                snackbar!!.show()
-            }
         }
     }
 

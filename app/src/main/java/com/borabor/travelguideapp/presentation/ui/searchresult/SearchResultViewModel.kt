@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,14 +30,16 @@ class SearchResultViewModel @Inject constructor(private val getTravelList: GetTr
         this.query = query
 
         viewModelScope.launch {
-            getTravelList().collect { response ->
+            getTravelList(ListType.ALL).collect { response ->
                 when (response) {
                     is Resource.Success -> {
                         travelList = response.data
                         queryList(query)
                         _uiState.value = UiState.successState()
                     }
-                    is Resource.Error -> _uiState.value = UiState.errorState(response.message)
+                    is Resource.Error -> {
+                        _uiState.value = UiState.errorState()
+                    }
                 }
             }
         }
