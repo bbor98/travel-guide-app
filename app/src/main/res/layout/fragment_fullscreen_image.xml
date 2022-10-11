@@ -38,10 +38,11 @@
 
         <TextView
             isVisible="@{!isFullscreen}"
+            android:fontFamily="@font/source_sans_pro_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/margin_medium"
             android:text="@{imageNumber}"
             android:textColor="@color/white"
             tools:text="1/10" />
