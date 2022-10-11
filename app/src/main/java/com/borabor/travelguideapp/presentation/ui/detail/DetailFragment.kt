@@ -80,7 +80,12 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+            if (bookmarkState.isError) {
+                binding.btBookmark.visibility = View.VISIBLE
+                binding.pbLoading.visibility = View.GONE
+
+                Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
