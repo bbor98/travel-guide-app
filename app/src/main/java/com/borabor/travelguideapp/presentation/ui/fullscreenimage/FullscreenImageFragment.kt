@@ -1,64 +1,55 @@
 package com.borabor.travelguideapp.presentation.ui.fullscreenimage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentFullscreenImageBinding
 import com.borabor.travelguideapp.domain.model.Image
-import com.borabor.travelguideapp.util.hideBottomNav
+import com.borabor.travelguideapp.presentation.base.BaseFragment
+import com.borabor.travelguideapp.presentation.ui.detail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class FullscreenImageFragment : Fragment() {
+@AndroidEntryPoint
+class FullscreenImageFragment : BaseFragment<FragmentFullscreenImageBinding>(R.layout.fragment_fullscreen_image) {
 
-    private var _binding: FragmentFullscreenImageBinding? = null
-    private val binding get() = _binding!!
-
-    private var isFullscreen = false
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentFullscreenImageBinding.inflate(inflater)
-        hideBottomNav()
-        return binding.root
-    }
+    override val viewModel: DetailViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        var imageList = emptyList<Image>()
-        var position = 0
-
-        val args = arguments?.let { FullscreenImageFragmentArgs.fromBundle(it) }
-        args?.let {
-            imageList = it.imageList.toList()
-            position = it.imagePosition
-        }
-
-        val totalImageCount = imageList.size
-
-        binding.vpImages.apply {
-            adapter = FullscreenImageAdapter { toggleUiVisibility() }.apply { submitList(imageList) }
-            setCurrentItem(position, false)
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                    binding.imageNumber = "${position + 1}/$totalImageCount"
-                }
-            })
-        }
+        getArgs()
 
         binding.btClose.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
+    private fun getArgs() {
+        val args = arguments?.let { FullscreenImageFragmentArgs.fromBundle(it) }
+        args?.let { setupViewPager(it.imageList.toList()) }
+    }
+
+    private fun setupViewPager(imageList: List<Image>) {
+        binding.vpImages.apply {
+            adapter = FullscreenImageAdapter { toggleUiVisibility() }.apply { submitList(imageList) }
+            setCurrentItem(viewModel.imagePosition.value!!, false)
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    binding.imageNumber = "${position + 1}/${imageList.size}"
+                    viewModel.setImagePosition(position)
+                }
+            })
+        }
+    }
+
     private fun toggleUiVisibility() {
-        if (isFullscreen) showUi() else hideUi()
+        if (binding.isFullscreen == true) showUi() else hideUi()
     }
 
     private fun hideUi() {
@@ -69,7 +60,6 @@ class FullscreenImageFragment : Fragment() {
         }
 
         binding.isFullscreen = true
-        isFullscreen = true
     }
 
     private fun showUi() {
@@ -77,11 +67,5 @@ class FullscreenImageFragment : Fragment() {
         WindowInsetsControllerCompat(requireActivity().window, binding.frameLayout).show(WindowInsetsCompat.Type.systemBars())
 
         binding.isFullscreen = false
-        isFullscreen = false
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

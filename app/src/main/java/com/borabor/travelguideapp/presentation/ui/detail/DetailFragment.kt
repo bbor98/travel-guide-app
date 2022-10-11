@@ -1,36 +1,24 @@
 package com.borabor.travelguideapp.presentation.ui.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentDetailBinding
-import com.borabor.travelguideapp.util.hideBottomNav
-import com.borabor.travelguideapp.util.showBottomNav
+import com.borabor.travelguideapp.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
 
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: DetailViewModel by viewModels()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentDetailBinding.inflate(inflater)
-        requireActivity().findViewById<View>(R.id.fade).visibility = View.GONE
-        hideBottomNav()
-        return binding.root
-    }
+    override val viewModel: DetailViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().findViewById<View>(R.id.fade).visibility = View.GONE
         getArgs()
         setupAdapter()
         setupViewClickListeners()
@@ -56,13 +44,13 @@ class DetailFragment : Fragment() {
             }
 
             ivImage.setOnClickListener {
-                val action = DetailFragmentDirections.actionDetailFragmentToFullscreenImageFragment(travel!!.images.toTypedArray(), imagePosition ?: 0)
+                val action = DetailFragmentDirections.actionDetailFragmentToFullscreenImageFragment(travel!!.images.toTypedArray())
                 findNavController().navigate(action)
             }
 
             btBookmark.setOnClickListener {
-                binding.btBookmark.visibility = View.GONE
-                binding.pbLoading.visibility = View.VISIBLE
+                btBookmark.visibility = View.GONE
+                pbLoading.visibility = View.VISIBLE
                 viewModel.bookmark(travel!!.id, travel!!.isBookmark)
             }
         }
@@ -80,11 +68,13 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.bookmarkState.observe(viewLifecycleOwner) { bookmarkState ->
-            if (bookmarkState.isError) {
-                binding.btBookmark.visibility = View.VISIBLE
-                binding.pbLoading.visibility = View.GONE
+            bookmarkState?.let {
+                if (it.isError) {
+                    binding.btBookmark.visibility = View.VISIBLE
+                    binding.pbLoading.visibility = View.GONE
 
-                Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.error_bookmark), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -96,12 +86,11 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.imagePosition = viewModel.getImagePosition()
+        binding.imagePosition = viewModel.imagePosition.value
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
-        showBottomNav()
+        requireActivity().findViewById<View>(R.id.fade).visibility = View.VISIBLE
     }
 }

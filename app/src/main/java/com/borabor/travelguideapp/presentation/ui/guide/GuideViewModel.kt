@@ -2,13 +2,13 @@ package com.borabor.travelguideapp.presentation.ui.guide
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Category
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetGuideCategories
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
 import com.borabor.travelguideapp.domain.usecase.UpdateBookmark
+import com.borabor.travelguideapp.presentation.base.BaseViewModel
 import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
@@ -23,7 +23,7 @@ class GuideViewModel @Inject constructor(
     private val getTravelList: GetTravelList,
     private val getGuideCategories: GetGuideCategories,
     private val updateBookmark: UpdateBookmark
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _mightNeedList = MutableLiveData(emptyList<Travel>())
     val mightNeedList: LiveData<List<Travel>> = _mightNeedList
@@ -34,17 +34,11 @@ class GuideViewModel @Inject constructor(
     private val _topPickList = MutableLiveData(emptyList<Travel>())
     val topPickList: LiveData<List<Travel>> = _topPickList
 
-    private val _bookmarkState = MutableLiveData<UiState?>(null)
-    val bookmarkState: LiveData<UiState?> = _bookmarkState
-
-    private val _uiState = MutableLiveData(UiState.loadingState())
-    val uiState: LiveData<UiState> = _uiState
-
     init {
         fetchLists()
     }
 
-    private fun fetchLists() {
+    fun fetchLists() {
         combine(
             getTravelList(ListType.MIGHT_NEEDS),
             getTravelList(ListType.TOP_PICK_ARTICLES),
@@ -88,10 +82,5 @@ class GuideViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun retry() {
-        _uiState.value = UiState.loadingState()
-        fetchLists()
     }
 }

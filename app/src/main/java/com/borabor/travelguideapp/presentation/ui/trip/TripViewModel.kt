@@ -2,10 +2,10 @@ package com.borabor.travelguideapp.presentation.ui.trip
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.*
+import com.borabor.travelguideapp.presentation.base.BaseViewModel
 import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
@@ -22,7 +22,7 @@ class TripViewModel @Inject constructor(
     private val getTravelList: GetTravelList,
     private val getBookmarks: GetBookmarks,
     private val updateBookmark: UpdateBookmark
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _tabPosition = MutableLiveData(0)
     val tabPosition: LiveData<Int> = _tabPosition
@@ -35,12 +35,6 @@ class TripViewModel @Inject constructor(
 
     private val _bookmarkList = MutableLiveData(emptyList<Travel>())
     val bookmarkList: LiveData<List<Travel>> = _bookmarkList
-
-    private val _bookmarkState = MutableLiveData<UiState?>(null)
-    val bookmarkState: LiveData<UiState?> = _bookmarkState
-
-    private val _uiState = MutableLiveData(UiState.loadingState())
-    val uiState: LiveData<UiState> = _uiState
 
     init {
         fetchTripList()
@@ -120,10 +114,5 @@ class TripViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun retry() {
-        _uiState.value = UiState.loadingState()
-        fetchBookmarkList()
     }
 }

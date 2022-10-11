@@ -3,35 +3,29 @@ package com.borabor.travelguideapp.presentation.ui.trip
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentTripBinding
 import com.borabor.travelguideapp.databinding.LayoutBottomSheetBinding
 import com.borabor.travelguideapp.domain.model.Travel
+import com.borabor.travelguideapp.presentation.base.BaseFragment
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
 import com.borabor.travelguideapp.util.calculateDaysBetweenDates
 import com.borabor.travelguideapp.util.handleBookmarkState
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class TripFragment : Fragment() {
+class TripFragment : BaseFragment<FragmentTripBinding>(R.layout.fragment_trip) {
 
-    private var _binding: FragmentTripBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: TripViewModel by viewModels()
+    override val viewModel: TripViewModel by viewModels()
 
     private val adapterTrip = TripPlanAdapter(
         isTrips = true,
@@ -56,25 +50,13 @@ class TripFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-
     private lateinit var ivDelete: ImageView
     private lateinit var pbLoading: ProgressBar
-
-    private var snackbar: Snackbar? = null
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var bottomSheetBinding: LayoutBottomSheetBinding
 
     private lateinit var trip: Travel
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentTripBinding.inflate(inflater).apply {
-            lifecycleOwner = this@TripFragment
-            viewModel = this@TripFragment.viewModel
-        }
-
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,7 +73,9 @@ class TripFragment : Fragment() {
         }
 
         binding.apiResponseState.btRetry.setOnClickListener {
-            viewModel.retry()
+            viewModel.retryConnection {
+                viewModel.fetchBookmarkList()
+            }
         }
     }
 
@@ -231,15 +215,5 @@ class TripFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (viewModel.tabPosition.value == 1) viewModel.fetchBookmarkList()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        snackbar?.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

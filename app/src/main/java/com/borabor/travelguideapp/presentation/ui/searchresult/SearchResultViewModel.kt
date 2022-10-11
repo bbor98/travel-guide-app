@@ -2,10 +2,10 @@ package com.borabor.travelguideapp.presentation.ui.searchresult
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
+import com.borabor.travelguideapp.presentation.base.BaseViewModel
 import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
@@ -14,15 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultViewModel @Inject constructor(private val getTravelList: GetTravelList) : ViewModel() {
+class SearchResultViewModel @Inject constructor(private val getTravelList: GetTravelList) : BaseViewModel() {
 
     private var travelList = emptyList<Travel>()
 
     private val _searchResult = MutableLiveData<List<Travel>?>(null)
     val searchResult: LiveData<List<Travel>?> = _searchResult
-
-    private val _uiState = MutableLiveData(UiState.loadingState())
-    val uiState: LiveData<UiState> = _uiState
 
     private var query = ""
 
@@ -53,10 +50,5 @@ class SearchResultViewModel @Inject constructor(private val getTravelList: GetTr
                     it.city.lowercase().contains(query) ||
                     it.description.lowercase().contains(query)
         }
-    }
-
-    fun retry() {
-        _uiState.value = UiState.loadingState()
-        fetchTravelListWithQuery(query)
     }
 }

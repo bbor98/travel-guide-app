@@ -1,7 +1,9 @@
 package com.borabor.travelguideapp.presentation.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.borabor.travelguideapp.R
@@ -19,5 +21,14 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            if (
+                destination.id == R.id.detailFragment ||
+                destination.id == R.id.fullscreenImageFragment ||
+                destination.id == R.id.searchResultFragment
+            ) binding.bottomNav.visibility = View.GONE
+            else binding.bottomNav.visibility = View.VISIBLE
+        }
     }
 }

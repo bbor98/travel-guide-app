@@ -1,41 +1,24 @@
 package com.borabor.travelguideapp.presentation.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentHomeBinding
-import com.google.android.material.snackbar.Snackbar
+import com.borabor.travelguideapp.presentation.base.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
     private lateinit var adapter: DealAdapter
 
     private var tabPosition = 0
-
-    private var snackbar: Snackbar? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentHomeBinding.inflate(inflater).apply {
-            lifecycleOwner = this@HomeFragment
-            viewModel = this@HomeFragment.viewModel
-        }
-
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,7 +29,9 @@ class HomeFragment : Fragment() {
         subscribeToObservables()
 
         binding.apiResponseState.btRetry.setOnClickListener {
-            viewModel.retry()
+            viewModel.retryConnection {
+                viewModel.fetchDealList()
+            }
         }
     }
 
@@ -114,16 +99,6 @@ class HomeFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(TAB_POSITION, tabPosition)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        snackbar?.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {

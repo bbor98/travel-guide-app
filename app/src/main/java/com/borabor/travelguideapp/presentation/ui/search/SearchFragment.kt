@@ -2,46 +2,30 @@ package com.borabor.travelguideapp.presentation.ui.search
 
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentSearchBinding
+import com.borabor.travelguideapp.presentation.base.BaseFragment
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
 import com.borabor.travelguideapp.util.checkQueryTextAndProceed
 import com.borabor.travelguideapp.util.handleBookmarkState
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: SearchViewModel by viewModels()
+    override val viewModel: SearchViewModel by viewModels()
 
     private lateinit var adapterTopDest: TopDestAdapter
     private lateinit var adapterNearby: NearbyAdapter
 
     private lateinit var ivBookmark: ImageView
     private lateinit var pbLoading: ProgressBar
-
-    private var snackbar: Snackbar? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentSearchBinding.inflate(inflater).apply {
-            lifecycleOwner = this@SearchFragment
-            viewModel = this@SearchFragment.viewModel
-        }
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +35,9 @@ class SearchFragment : Fragment() {
         subscribeToObservables()
 
         binding.apiResponseState.btRetry.setOnClickListener {
-            viewModel.retry()
+            viewModel.retryConnection {
+                viewModel.fetchLists()
+            }
         }
     }
 
@@ -112,15 +98,5 @@ class SearchFragment : Fragment() {
                 bookmarkState?.handleBookmarkState(this, ivBookmark, pbLoading)
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        snackbar?.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

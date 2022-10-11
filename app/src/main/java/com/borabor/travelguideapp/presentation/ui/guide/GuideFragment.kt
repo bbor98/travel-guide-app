@@ -2,48 +2,32 @@ package com.borabor.travelguideapp.presentation.ui.guide
 
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentGuideBinding
 import com.borabor.travelguideapp.domain.model.Category
+import com.borabor.travelguideapp.presentation.base.BaseFragment
 import com.borabor.travelguideapp.util.checkQueryTextAndProceed
 import com.borabor.travelguideapp.util.handleBookmarkState
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GuideFragment : Fragment() {
+class GuideFragment : BaseFragment<FragmentGuideBinding>(R.layout.fragment_guide) {
 
-    private var _binding: FragmentGuideBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: GuideViewModel by viewModels()
+    override val viewModel: GuideViewModel by viewModels()
 
     private lateinit var adapterMightNeed: MightNeedAdapter
     private lateinit var adapterTopPick: TopPickAdapter
 
     private lateinit var ivBookmark: ImageView
     private lateinit var pbLoading: ProgressBar
-
-    private var snackbar: Snackbar? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentGuideBinding.inflate(inflater).apply {
-            lifecycleOwner = this@GuideFragment
-            viewModel = this@GuideFragment.viewModel
-        }
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +37,9 @@ class GuideFragment : Fragment() {
         subscribeToObservables()
 
         binding.apiResponseState.btRetry.setOnClickListener {
-            viewModel.retry()
+            viewModel.retryConnection {
+                viewModel.fetchLists()
+            }
         }
     }
 
@@ -152,15 +138,5 @@ class GuideFragment : Fragment() {
                 bookmarkState?.handleBookmarkState(this, ivBookmark, pbLoading)
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        snackbar?.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

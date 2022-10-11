@@ -2,11 +2,11 @@ package com.borabor.travelguideapp.presentation.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.model.Travel
 import com.borabor.travelguideapp.domain.usecase.GetTravelList
 import com.borabor.travelguideapp.domain.usecase.UpdateBookmark
+import com.borabor.travelguideapp.presentation.base.BaseViewModel
 import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getTravelList: GetTravelList,
     private val updateBookmark: UpdateBookmark
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _topDestList = MutableLiveData(emptyList<Travel>())
     val topDestList: LiveData<List<Travel>> = _topDestList
@@ -28,17 +28,11 @@ class SearchViewModel @Inject constructor(
     private val _nearbyList = MutableLiveData(emptyList<Travel>())
     val nearbyList: LiveData<List<Travel>> = _nearbyList
 
-    private val _bookmarkState = MutableLiveData<UiState?>(null)
-    val bookmarkState: LiveData<UiState?> = _bookmarkState
-
-    private val _uiState = MutableLiveData(UiState.loadingState())
-    val uiState: LiveData<UiState> = _uiState
-
     init {
         fetchLists()
     }
 
-    private fun fetchLists() {
+    fun fetchLists() {
         combine(
             getTravelList(ListType.TOP_DESTINATIONS),
             getTravelList(ListType.NEARBY_ATTRACTIONS)
@@ -77,10 +71,5 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun retry() {
-        _uiState.value = UiState.loadingState()
-        fetchLists()
     }
 }

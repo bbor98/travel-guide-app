@@ -2,9 +2,9 @@ package com.borabor.travelguideapp.presentation.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borabor.travelguideapp.domain.usecase.UpdateBookmark
+import com.borabor.travelguideapp.presentation.base.BaseViewModel
 import com.borabor.travelguideapp.util.Resource
 import com.borabor.travelguideapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val updateBookmark: UpdateBookmark) : ViewModel() {
+class DetailViewModel @Inject constructor(private val updateBookmark: UpdateBookmark) : BaseViewModel() {
 
     private val _isBookmark = MutableLiveData<Boolean>()
-    val isBookmark: LiveData<Boolean?> = _isBookmark
+    val isBookmark: LiveData<Boolean?> get() = _isBookmark
 
-    private val _bookmarkState = MutableLiveData(UiState.successState())
-    val bookmarkState: LiveData<UiState> = _bookmarkState
+    private val _imagePosition = MutableLiveData(0)
+    val imagePosition: LiveData<Int> get() = _imagePosition
 
     fun bookmark(id: String, isBookmark: Boolean) {
         viewModelScope.launch {
@@ -36,11 +36,7 @@ class DetailViewModel @Inject constructor(private val updateBookmark: UpdateBook
         }
     }
 
-    private var imagePosition: Int? = 0
-
     fun setImagePosition(imagePosition: Int?) {
-        this.imagePosition = imagePosition
+        _imagePosition.value = imagePosition
     }
-
-    fun getImagePosition() = imagePosition
 }

@@ -53,9 +53,6 @@
         <argument
             android:name="imageList"
             app:argType="com.borabor.travelguideapp.domain.model.Image[]" />
-        <argument
-            android:name="imagePosition"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"

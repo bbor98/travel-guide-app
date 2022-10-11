@@ -8,18 +8,9 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.borabor.travelguideapp.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-
-fun Fragment.hideBottomNav() {
-    requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)?.visibility = View.GONE
-}
-
-fun Fragment.showBottomNav() {
-    requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)?.visibility = View.VISIBLE
-}
 
 fun EditText.checkQueryTextAndProceed(fragment: Fragment, action: (String) -> Unit) {
     val query = text.toString().lowercase()
