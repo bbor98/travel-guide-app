@@ -24,12 +24,7 @@ class SearchResultAdapter(private val onItemClicked: (Travel) -> Unit) : ListAda
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.view.apply {
-            imageUrl = item.images.first().url
-            title = item.title
-            description = item.description
-        }
+        holder.view.travel = getItem(position)
     }
 
     object DiffCallback : DiffUtil.ItemCallback<Travel>() {

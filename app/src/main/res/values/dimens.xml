@@ -66,4 +66,9 @@
 
     <dimen name="fade_height_main">88dp</dimen>
     <dimen name="fade_height_detail">144dp</dimen>
+
+    <dimen name="label_radius">4dp</dimen>
+    <dimen name="label_padding">6dp</dimen>
+    <dimen name="label_margin_small">8dp</dimen>
+    <dimen name="label_text_small">12sp</dimen>
 </resources>

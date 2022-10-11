@@ -6,16 +6,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="description"
-            type="String" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
     </data>
 
@@ -42,11 +34,18 @@
                 app:cardElevation="0dp">
 
                 <ImageView
-                    loadImage="@{imageUrl}"
+                    loadImage="@{travel.images[0].url}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    style="@style/Label"
+                    android:layout_margin="@dimen/label_margin_small"
+                    android:text="@{travel.category.toUpperCase()}"
+                    android:textSize="@dimen/label_text_small"
+                    tools:text="LABEL" />
 
             </androidx.cardview.widget.CardView>
 
@@ -63,17 +62,17 @@
                     android:layout_margin="0dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{title}"
+                    android:text="@{travel.title}"
                     tools:text="Title" />
 
                 <TextView
-                    android:text="@{description}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="4dp"
-                    android:maxLines="3"
                     android:ellipsize="end"
                     android:fontFamily="@font/source_sans_pro_regular"
+                    android:maxLines="3"
+                    android:text="@{travel.description}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="Description" />

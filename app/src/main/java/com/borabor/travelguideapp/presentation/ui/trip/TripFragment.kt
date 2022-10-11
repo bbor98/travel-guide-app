@@ -158,8 +158,13 @@ class TripFragment : Fragment() {
             spDestination.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, list.map { it.title })
             spDestination.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    bottomSheetBinding.imageUrl = list[position].images[0].url
-                    trip = list[position]
+                    val item = list[position]
+
+                    imageUrl = item.images[0].url
+                    label = item.category.uppercase()
+
+                    trip = item
+
                     view?.let {
                         (it as TextView).apply {
                             text = trip.title

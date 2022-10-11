@@ -70,4 +70,15 @@
         <item name="cornerSizeBottomLeft">@dimen/detail_image_radius</item>
         <item name="cornerSizeBottomRight">@dimen/detail_image_radius</item>
     </style>
+
+    <style name="Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+        <item name="android:background">@drawable/bg_label</item>
+        <item name="fontFamily">@font/source_sans_pro_semibold</item>
+        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:textColor">@color/white2</item>
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
 </resources>

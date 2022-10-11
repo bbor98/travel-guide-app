@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="imageUrl"
+            type="String" />
+
+        <variable
+            name="label"
             type="String" />
 
     </data>
@@ -16,13 +21,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            loadImage="@{imageUrl}"
-            app:shapeAppearanceOverlay="@style/BottomSheetImageShape"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_trip_plan_height"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_image" />
+            android:layout_height="@dimen/item_trip_plan_height">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                loadImage="@{imageUrl}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image"
+                app:shapeAppearanceOverlay="@style/BottomSheetImageShape" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@{label}"
+                tools:text="LABEL" />
+
+        </FrameLayout>
 
         <TextView
             style="@style/Subtitle"
@@ -42,10 +58,10 @@
                 app:tint="@color/blue4" />
 
             <Spinner
-                android:backgroundTint="@color/black"
                 android:id="@+id/spDestination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:spinnerMode="dialog" />
 
         </LinearLayout>
@@ -90,8 +106,8 @@
             app:drawableTint="@color/blue4" />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/AddButton"
             android:id="@+id/btAddTrip"
+            style="@style/AddButton"
             android:text="@string/add_trip" />
 
     </LinearLayout>

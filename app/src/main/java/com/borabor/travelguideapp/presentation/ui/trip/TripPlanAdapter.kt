@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.ItemTripPlanBinding
 import com.borabor.travelguideapp.domain.model.Travel
-import com.borabor.travelguideapp.util.calculateDaysBetweenDates
 
 class TripPlanAdapter(
     private val isTrips: Boolean,
@@ -41,18 +40,8 @@ class TripPlanAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position]
-
-        holder.view.apply {
-            imageUrl = item.images.first().url
-            title = item.city
-            text = if (this@TripPlanAdapter.isTrips) item.schedule else item.country
-            isTrips = this@TripPlanAdapter.isTrips
-            if (this@TripPlanAdapter.isTrips && list.isNotEmpty()) {
-                imageCount = item.images.size
-                tripLength = item.schedule?.calculateDaysBetweenDates()
-            }
-        }
+        holder.view.travel = list[position]
+        holder.view.isTrips = isTrips
     }
 
     override fun getItemCount() = list.size

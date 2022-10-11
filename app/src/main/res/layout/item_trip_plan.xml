@@ -5,25 +5,11 @@
 
     <data>
 
-        <variable
-            name="imageUrl"
-            type="String" />
+        <import type="com.borabor.travelguideapp.util.ExtensionsKt" />
 
         <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="text"
-            type="String" />
-
-        <variable
-            name="imageCount"
-            type="Integer" />
-
-        <variable
-            name="tripLength"
-            type="Integer" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
         <variable
             name="isTrips"
@@ -44,7 +30,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                loadImage="@{imageUrl}"
+                loadImage="@{travel.images[0].url}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -68,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@{title}"
+                android:text="@{travel.city}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/title_large"
@@ -79,13 +65,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:text="@{text}"
+                android:text="@{isTrips ? travel.schedule : travel.country}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/text_normal"
                 tools:text="Text" />
 
         </LinearLayout>
+
+        <TextView
+            style="@style/Label"
+            android:text="@{travel.category.toUpperCase()}"
+            tools:text="LABEL" />
 
         <FrameLayout
             android:id="@+id/btDelete"
@@ -126,7 +117,7 @@
             android:drawablePadding="4dp"
             android:fontFamily="@font/source_sans_pro_regular"
             android:gravity="center"
-            android:text="@{isTrips ? @plurals/image_count(imageCount, imageCount) : ``}"
+            android:text="@{@plurals/image_count(travel.images.size, travel.images.size)}"
             android:textColor="@color/white2"
             android:textSize="@dimen/text_normal"
             app:drawableStartCompat="@drawable/ic_image"
@@ -134,7 +125,7 @@
             tools:text="4 images" />
 
         <TextView
-            isVisible="@{isTrips &amp;&amp; tripLength > 0L}"
+            isVisible="@{isTrips &amp;&amp; ExtensionsKt.calculateDaysBetweenDates(travel.schedule) > 0L}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -142,7 +133,7 @@
             android:drawablePadding="4dp"
             android:fontFamily="@font/source_sans_pro_regular"
             android:gravity="center"
-            android:text="@{isTrips ? @plurals/trip_length(tripLength, tripLength) : ``}"
+            android:text="@{@plurals/trip_length(ExtensionsKt.calculateDaysBetweenDates(travel.schedule), ExtensionsKt.calculateDaysBetweenDates(travel.schedule))}"
             android:textColor="@color/white2"
             android:textSize="@dimen/text_normal"
             app:drawableStartCompat="@drawable/ic_time"

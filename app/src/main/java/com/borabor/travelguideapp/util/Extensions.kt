@@ -30,18 +30,18 @@ fun EditText.checkQueryTextAndProceed(fragment: Fragment, action: (String) -> Un
     } else action(query)
 }
 
-fun String?.calculateDaysBetweenDates(): Int {
+fun String?.calculateDaysBetweenDates() = this?.let {
     val dtf: DateTimeFormatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         DateTimeFormatter.ofPattern("dd MMM, yyyy")
     } else return 0
 
-    val inputString = this?.split(" - ")
+    val inputString = it.split(" - ")
 
-    val date1: LocalDate? = LocalDate.parse(inputString?.first(), dtf)
-    val date2: LocalDate? = LocalDate.parse(inputString?.last(), dtf)
+    val date1: LocalDate? = LocalDate.parse(inputString.first(), dtf)
+    val date2: LocalDate? = LocalDate.parse(inputString.last(), dtf)
 
-    return Duration.between(date1?.atStartOfDay(), date2?.atStartOfDay()).toDays().toInt()
-}
+    Duration.between(date1?.atStartOfDay(), date2?.atStartOfDay()).toDays().toInt()
+} ?: 0
 
 fun UiState.handleBookmarkState(fragment: Fragment, imageView: ImageView, progressBar: ProgressBar) {
     if (isLoading) {
