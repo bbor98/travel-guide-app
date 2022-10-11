@@ -50,8 +50,8 @@
 
                 <FrameLayout
                     android:id="@+id/btBookmark"
-                    android:layout_width="@dimen/bookmark_size"
-                    android:layout_height="@dimen/bookmark_size"
+                    android:layout_width="@dimen/round_button_size"
+                    android:layout_height="@dimen/round_button_size"
                     android:layout_gravity="end"
                     android:layout_margin="@dimen/margin_small">
 

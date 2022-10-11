@@ -30,8 +30,8 @@
         <FrameLayout
             android:id="@+id/btClose"
             isVisible="@{!isFullscreen}"
-            android:layout_width="@dimen/bookmark_size"
-            android:layout_height="@dimen/bookmark_size"
+            android:layout_width="@dimen/round_button_size"
+            android:layout_height="@dimen/round_button_size"
             android:layout_margin="@dimen/margin_medium">
 
             <View
