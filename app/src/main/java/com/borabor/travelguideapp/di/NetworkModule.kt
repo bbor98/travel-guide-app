@@ -22,7 +22,7 @@ import javax.inject.Singleton
 object NetworkModule {
     private const val BASE_URL = "https://6339f07e471b8c3955686976.mockapi.io/"
 
-    private const val CACHE_SIZE = 1024 * 1024 * 5L // 5 MB
+    private const val CACHE_SIZE = 1024 * 1024 * 10L // 10 MB
     private const val CACHE_MAX_AGE = 60 * 60  // 1 hour
     private const val CACHE_MAX_STALE = 60 * 60 * 24 * 7 // 7 days
 
