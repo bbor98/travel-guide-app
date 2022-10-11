@@ -63,4 +63,7 @@
     <dimen name="search_result_app_bar_height">200dp</dimen>
     <dimen name="item_search_result_width">160dp</dimen>
     <dimen name="item_search_result_height">120dp</dimen>
+
+    <dimen name="fade_height_main">88dp</dimen>
+    <dimen name="fade_height_detail">144dp</dimen>
 </resources>

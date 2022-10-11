@@ -37,6 +37,15 @@
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/menu_bottom_nav" />
 
+        <View
+            android:id="@+id/fade"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fade_height_main"
+            android:background="@drawable/bg_fading_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

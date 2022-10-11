@@ -24,13 +24,13 @@ class DetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetailBinding.inflate(inflater)
+        requireActivity().findViewById<View>(R.id.fade).visibility = View.GONE
         hideBottomNav()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         getArgs()
         setupAdapter()
         setupViewClickListeners()
