@@ -29,7 +29,7 @@
 
         <include
             android:id="@+id/flights"
-            layout="@layout/layout_home_banner_button"
+            layout="@layout/layout_banner_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
@@ -42,7 +42,7 @@
 
         <include
             android:id="@+id/hotels"
-            layout="@layout/layout_home_banner_button"
+            layout="@layout/layout_banner_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
@@ -55,7 +55,7 @@
 
         <include
             android:id="@+id/cars"
-            layout="@layout/layout_home_banner_button"
+            layout="@layout/layout_banner_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
@@ -68,7 +68,7 @@
 
         <include
             android:id="@+id/taxi"
-            layout="@layout/layout_home_banner_button"
+            layout="@layout/layout_banner_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
