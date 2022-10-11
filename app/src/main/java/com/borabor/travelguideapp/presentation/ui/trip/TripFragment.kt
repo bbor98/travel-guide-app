@@ -89,6 +89,34 @@ class TripFragment : Fragment() {
             viewModel.fetchTravelList()
             bottomSheetDialog.show()
         }
+
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retry()
+        }
+    }
+
+    private fun setupTabLayout() {
+        binding.tlTripPlan.getTabAt(viewModel.tabPosition.value!!)?.select()
+        binding.tlTripPlan.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> {
+                        binding.rvTripPlan.adapter = adapterTrip
+                        viewModel.fetchTripList()
+                    }
+                    1 -> {
+                        binding.rvTripPlan.adapter = adapterBookmark
+                        viewModel.fetchBookmarkList()
+                    }
+                }
+
+                binding.rvTripPlan.scrollToPosition(0)
+                viewModel.setTabPosition(tab!!.position)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     private fun setupBottomSheetDialog() {
@@ -135,24 +163,6 @@ class TripFragment : Fragment() {
         }
     }
 
-    private fun setupDatePickedDialog(textView: TextView) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        DatePickerDialog(requireContext(), { _, y, m, d ->
-            calendar.set(Calendar.YEAR, y)
-            calendar.set(Calendar.MONTH, m)
-            calendar.set(Calendar.DAY_OF_MONTH, d)
-
-            textView.text = SimpleDateFormat("dd MMM, yyyy", Locale.ENGLISH).format(calendar.time)
-        }, year, month, day).apply {
-            datePicker.minDate = System.currentTimeMillis()
-            show()
-        }
-    }
-
     private fun setupBottomSheetSpinner(list: List<Travel>) {
         bottomSheetBinding.apply {
             spDestination.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, list.map { it.title })
@@ -178,28 +188,22 @@ class TripFragment : Fragment() {
         }
     }
 
-    private fun setupTabLayout() {
-        binding.tlTripPlan.getTabAt(viewModel.tabPosition.value!!)?.select()
-        binding.tlTripPlan.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> {
-                        binding.rvTripPlan.adapter = adapterTrip
-                        viewModel.fetchTripList()
-                    }
-                    1 -> {
-                        binding.rvTripPlan.adapter = adapterBookmark
-                        viewModel.fetchBookmarkList()
-                    }
-                }
+    private fun setupDatePickedDialog(textView: TextView) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-                binding.rvTripPlan.scrollToPosition(0)
-                viewModel.setTabPosition(tab!!.position)
-            }
+        DatePickerDialog(requireContext(), { _, y, m, d ->
+            calendar.set(Calendar.YEAR, y)
+            calendar.set(Calendar.MONTH, m)
+            calendar.set(Calendar.DAY_OF_MONTH, d)
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
+            textView.text = SimpleDateFormat("dd MMM, yyyy", Locale.ENGLISH).format(calendar.time)
+        }, year, month, day).apply {
+            datePicker.minDate = System.currentTimeMillis()
+            show()
+        }
     }
 
     private fun subscribeToObservables() {

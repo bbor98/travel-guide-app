@@ -43,6 +43,10 @@ class SearchResultFragment : Fragment() {
         setupToolbar()
         setupAdapter()
         subscribeToObservable()
+
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retry()
+        }
     }
 
     private fun getArgs() {

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Travel Guide App</string>
 
-    <string name="connection_error">Connection failed, please try again later.</string>
+    <string name="connection_error">Connection failed\nPlease try again later</string>
     <string name="retry">Retry</string>
 
     <string name="home">Home</string>
@@ -52,8 +52,10 @@
 
     <string name="add_bookmark">Add Bookmark</string>
     <string name="remove_bookmark">Remove Bookmark</string>
+
     <string name="error_search_query">Search text must be at least 3 characters long</string>
     <string name="search_results_for">Search results for \"%s\"</string>
     <string name="no_results_found">No results found</string>
+
     <string name="error_bookmark">An error occurred while updating the bookmark, please try again later.</string>
 </resources>

@@ -23,61 +23,56 @@
             android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/search" />
 
-        <include
-            android:id="@+id/search"
-            layout="@layout/layout_search_bar"
-            app:hint="@{@string/where_next}" />
-
-        <TextView
-            style="@style/Subtitle"
-            android:text="@string/top_destinations" />
-
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="224dp">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTopDest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_medium"
-                android:paddingEnd="4dp"
-                android:paddingBottom="@dimen/margin_large"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <include
-                layout="@layout/layout_api_response_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:isError="@{viewModel.uiState.error}"
-                app:isLoading="@{viewModel.uiState.loading}" />
-
-        </FrameLayout>
-
-        <TextView
-            style="@style/Subtitle"
-            android:text="@string/nearby_attractions" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvNearby"
+            <LinearLayout
+                isVisible="@{viewModel.uiState.success}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_small"
-                android:clipToPadding="false"
-                android:paddingStart="@dimen/margin_medium"
-                android:paddingEnd="@dimen/margin_medium"
-                android:paddingBottom="96dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/search"
+                    layout="@layout/layout_search_bar"
+                    app:hint="@{@string/where_next}" />
+
+                <TextView
+                    style="@style/Subtitle"
+                    android:text="@string/top_destinations" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTopDest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/margin_medium"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="@dimen/margin_large"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    style="@style/Subtitle"
+                    android:text="@string/nearby_attractions" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvNearby"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/margin_medium"
+                    android:paddingEnd="@dimen/margin_medium"
+                    android:paddingBottom="96dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
 
             <include
+                android:id="@+id/apiResponseState"
                 layout="@layout/layout_api_response_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

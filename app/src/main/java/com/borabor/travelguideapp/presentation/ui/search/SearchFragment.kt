@@ -49,6 +49,10 @@ class SearchFragment : Fragment() {
         setupSearchBar()
         setupAdapters()
         subscribeToObservables()
+
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retry()
+        }
     }
 
     private fun setupSearchBar() {

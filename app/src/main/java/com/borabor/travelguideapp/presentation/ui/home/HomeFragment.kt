@@ -41,14 +41,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupBannerButtons()
-        setupAdapter()
         setupTabLayout()
+        setupAdapter()
         subscribeToObservables()
-    }
 
-    private fun subscribeToObservables() {
-        viewModel.dealList.observe(viewLifecycleOwner) { travelList ->
-            adapter.submitList(travelList)
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retry()
         }
     }
 
@@ -67,15 +65,6 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), getString(R.string.taxi), Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun setupAdapter() {
-        adapter = DealAdapter { travel ->
-            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
-            findNavController().navigate(action)
-        }
-
-        binding.rvDeals.adapter = adapter
     }
 
     private fun setupTabLayout() {
@@ -98,6 +87,21 @@ class HomeFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+    }
+
+    private fun setupAdapter() {
+        adapter = DealAdapter { travel ->
+            val action = HomeFragmentDirections.actionGlobalDetailFragment(travel)
+            findNavController().navigate(action)
+        }
+
+        binding.rvDeals.adapter = adapter
+    }
+
+    private fun subscribeToObservables() {
+        viewModel.dealList.observe(viewLifecycleOwner) { travelList ->
+            adapter.submitList(travelList)
+        }
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {

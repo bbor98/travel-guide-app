@@ -39,8 +39,8 @@
                 app:contentScrim="@color/white"
                 app:expandedTitleTextAppearance="@style/MainTitle"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-                app:title="@{title}"
                 app:maxLines="3"
+                app:title="@{title}"
                 app:toolbarId="@id/toolbar">
 
                 <androidx.appcompat.widget.Toolbar
@@ -57,28 +57,29 @@
             android:id="@+id/rvSearchResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/margin_small"
             android:clipToPadding="false"
+            android:paddingTop="@dimen/margin_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <include
-            app:isError="@{viewModel.uiState.error}"
-            app:isLoading="@{viewModel.uiState.loading}"
+            android:id="@+id/apiResponseState"
             layout="@layout/layout_api_response_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            app:isError="@{viewModel.uiState.error}"
+            app:isLoading="@{viewModel.uiState.loading}" />
 
         <TextView
             android:id="@+id/tvNoResults"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/no_results_found"
             android:textColor="@color/blue4"
             android:textSize="@dimen/title_medium"
+            android:visibility="gone"
             app:drawableTint="@color/blue4"
             app:drawableTopCompat="@drawable/ic_search_no_result" />
 

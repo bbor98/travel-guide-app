@@ -51,6 +51,10 @@ class GuideFragment : Fragment() {
         setupAdapters()
         setupSearchBar()
         subscribeToObservables()
+
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retry()
+        }
     }
 
     private fun setupAdapters() {
