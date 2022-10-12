@@ -28,10 +28,6 @@ class SearchViewModel @Inject constructor(
     private val _nearbyList = MutableLiveData(emptyList<Travel>())
     val nearbyList: LiveData<List<Travel>> = _nearbyList
 
-    init {
-        fetchLists()
-    }
-
     fun fetchLists() {
         combine(
             getTravelList(ListType.TOP_DESTINATIONS),

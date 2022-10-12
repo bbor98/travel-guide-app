@@ -139,4 +139,9 @@ class GuideFragment : BaseFragment<FragmentGuideBinding>(R.layout.fragment_guide
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchLists()
+    }
 }

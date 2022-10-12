@@ -34,10 +34,6 @@ class GuideViewModel @Inject constructor(
     private val _topPickList = MutableLiveData(emptyList<Travel>())
     val topPickList: LiveData<List<Travel>> = _topPickList
 
-    init {
-        fetchLists()
-    }
-
     fun fetchLists() {
         combine(
             getTravelList(ListType.MIGHT_NEEDS),
