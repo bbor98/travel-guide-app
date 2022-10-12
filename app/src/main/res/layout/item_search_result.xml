@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
                     android:ellipsize="end"
+                    android:textSize="@dimen/title_small"
                     android:maxLines="1"
                     android:text="@{travel.title}"
                     tools:text="Title" />
@@ -64,13 +65,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/space_small"
                     android:ellipsize="end"
                     android:fontFamily="@font/source_sans_pro_regular"
                     android:maxLines="3"
                     android:text="@{travel.description}"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_normal"
+                    android:textSize="@dimen/text_small"
                     tools:text="Description" />
 
             </LinearLayout>

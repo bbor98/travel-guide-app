@@ -50,7 +50,7 @@
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/margin_medium"
-                    android:paddingEnd="4dp"
+                    android:paddingEnd="@dimen/recyclerview_padding_end"
                     android:paddingBottom="@dimen/margin_large"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -66,7 +66,7 @@
                     android:clipToPadding="false"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingEnd="@dimen/margin_medium"
-                    android:paddingBottom="96dp"
+                    android:paddingBottom="@dimen/recyclerview_padding_bottom_medium"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>

@@ -25,8 +25,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tlTripPlan"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="@dimen/tab_height_trip"
+            android:layout_marginStart="@dimen/space_large"
             android:layout_marginTop="@dimen/margin_large"
             android:background="@color/white"
             app:tabIconTint="@color/trip_plan_tab_tint"
@@ -60,11 +60,11 @@
                 android:id="@+id/rvTripPlan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/tab_height_trip"
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/margin_medium"
                 android:paddingEnd="@dimen/margin_medium"
-                android:paddingBottom="@{viewModel.tabPosition == 0 ? @dimen/trips_padding_bottom : @dimen/bookmark_padding_bottom}"
+                android:paddingBottom="@{viewModel.tabPosition == 0 ? @dimen/recyclerview_padding_bottom_large : @dimen/recyclerview_padding_bottom_medium}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <include
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
-                android:layout_marginBottom="112dp"
+                android:layout_marginBottom="@dimen/trip_fab_bottom_margin"
                 android:backgroundTint="@color/pink"
                 android:src="@drawable/ic_add"
                 app:borderWidth="0dp"

@@ -87,7 +87,7 @@
             android:fontFamily="@font/source_sans_pro_bold"
             android:text="@string/next_destination"
             android:textColor="@color/white2"
-            android:textSize="32sp"
+            android:textSize="@dimen/home_title_size"
             app:layout_constraintBottom_toTopOf="@+id/flights"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -106,8 +106,8 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tlDeals"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_marginTop="6dp"
+                android:layout_height="@dimen/tab_height_home"
+                android:layout_marginTop="@dimen/space_medium"
                 android:background="@color/white"
                 app:tabIndicatorColor="@color/pink"
                 app:tabIndicatorFullWidth="false"
@@ -151,7 +151,7 @@
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingTop="@dimen/margin_medium"
-                    android:paddingEnd="4dp"
+                    android:paddingEnd="@dimen/recyclerview_padding_end"
                     android:paddingBottom="@dimen/margin_medium"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
