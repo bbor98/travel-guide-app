@@ -15,6 +15,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +26,10 @@ object NetworkModule {
     private const val CACHE_SIZE = 1024 * 1024 * 10L // 10 MB
     private const val CACHE_MAX_AGE = 60 * 60  // 1 hour
     private const val CACHE_MAX_STALE = 60 * 60 * 24 * 7 // 7 days
+
+    private const val CONNECT_TIMEOUT = 30L // 30 seconds
+    private const val READ_TIMEOUT = 30L // 30 seconds
+    private const val WRITE_TIMEOUT = 30L // 30 seconds
 
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -62,6 +67,9 @@ object NetworkModule {
                     .build()
             )
         }
+        .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
         .build()
 
     @Singleton
