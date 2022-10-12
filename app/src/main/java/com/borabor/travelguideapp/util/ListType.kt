@@ -5,6 +5,7 @@ enum class ListType {
     DEALS,
     TOP_DESTINATIONS,
     NEARBY_ATTRACTIONS,
+    TRIP_LOCATIONS,
     MIGHT_NEEDS,
     TOP_PICK_ARTICLES
 }

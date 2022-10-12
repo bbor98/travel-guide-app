@@ -15,6 +15,7 @@ class GetTravelList @Inject constructor(private val repository: TravelRepository
                     DEALS -> getDeals()
                     TOP_DESTINATIONS -> getTopDestinations()
                     NEARBY_ATTRACTIONS -> getNearbyAttractions()
+                    TRIP_LOCATIONS -> getTripLocations()
                     MIGHT_NEEDS -> getMightNeeds()
                     TOP_PICK_ARTICLES -> getTopPickArticles()
                 }

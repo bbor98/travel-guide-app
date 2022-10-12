@@ -68,7 +68,7 @@ class TripViewModel @Inject constructor(
 
     fun fetchTravelList() {
         viewModelScope.launch {
-            getTravelList(ListType.ALL).collect { response ->
+            getTravelList(ListType.TRIP_LOCATIONS).collect { response ->
                 when (response) {
                     is Resource.Success -> {
                         _travelList.value = response.data.filter {

@@ -27,6 +27,10 @@ class TravelRepositoryImpl @Inject constructor(
         api.getTravelList("nearby")
     }
 
+    override suspend fun getTripLocations() = safeApiCall.execute {
+        api.getTravelList("hotel|topdestination|nearby|mightneed")
+    }
+
     override suspend fun getMightNeeds() = safeApiCall.execute {
         api.getTravelList("mightneed")
     }

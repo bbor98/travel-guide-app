@@ -8,6 +8,7 @@ interface TravelRepository {
     suspend fun getDeals(): Resource<List<Travel>>
     suspend fun getTopDestinations(): Resource<List<Travel>>
     suspend fun getNearbyAttractions(): Resource<List<Travel>>
+    suspend fun getTripLocations(): Resource<List<Travel>>
     suspend fun getMightNeeds(): Resource<List<Travel>>
     suspend fun getTopPickArticles(): Resource<List<Travel>>
 }
