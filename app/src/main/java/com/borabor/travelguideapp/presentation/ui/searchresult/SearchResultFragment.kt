@@ -9,6 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentSearchResultBinding
 import com.borabor.travelguideapp.presentation.base.BaseFragment
+import com.borabor.travelguideapp.presentation.ui.home.HomeFragment
+import com.borabor.travelguideapp.presentation.ui.home.HomeFragment.DealType.*
+import com.borabor.travelguideapp.util.ListType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +21,8 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
 
     private lateinit var adapter: SearchResultAdapter
 
+    private var listType = ListType.ALL
+    private var dealType = FLIGHTS
     private var query = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +35,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
 
         binding.apiResponseState.btRetry.setOnClickListener {
             viewModel.retryConnection {
-                viewModel.fetchTravelListWithQuery(query)
+                viewModel.getResults(listType, dealType, query)
             }
         }
     }
@@ -38,9 +43,22 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
     private fun getArgs() {
         val args = arguments?.let { SearchResultFragmentArgs.fromBundle(it) }
         args?.let {
-            binding.title = it.title
-            viewModel.fetchTravelListWithQuery(it.query)
+            listType = it.listType
+            dealType = it.dealType
             query = it.query
+
+            binding.title = setTitle(listType, dealType)
+            viewModel.getResults(listType, dealType, query)
+        }
+    }
+
+    private fun setTitle(searchType: ListType, dealType: HomeFragment.DealType) = when (searchType) {
+        ListType.ALL -> getString(R.string.search_results_for, query)
+        ListType.MIGHT_NEEDS -> getString(R.string.might_need_these)
+        else -> when (dealType) {
+            FLIGHTS -> getString(R.string.flights)
+            HOTELS -> getString(R.string.hotels)
+            TRANSPORTATIONS -> getString(R.string.transportations)
         }
     }
 
@@ -68,7 +86,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
     }
 
     private fun subscribeToObservable() {
-        viewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
+        viewModel.resultList.observe(viewLifecycleOwner) { searchResult ->
             searchResult?.let {
                 if (it.isEmpty()) binding.tvNoResults.visibility = View.VISIBLE
                 else adapter.submitList(searchResult)

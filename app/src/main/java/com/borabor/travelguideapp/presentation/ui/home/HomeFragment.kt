@@ -2,12 +2,12 @@ package com.borabor.travelguideapp.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentHomeBinding
 import com.borabor.travelguideapp.presentation.base.BaseFragment
+import com.borabor.travelguideapp.util.ListType
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,16 +38,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun setupBannerButtons() {
         binding.apply {
             flights.root.setOnClickListener {
-                Toast.makeText(requireContext(), getString(R.string.flights), Toast.LENGTH_SHORT).show()
+                val action = HomeFragmentDirections.actionGlobalSearchResultFragment(ListType.DEALS, DealType.FLIGHTS)
+                findNavController().navigate(action)
             }
             hotels.root.setOnClickListener {
-                Toast.makeText(requireContext(), getString(R.string.hotels), Toast.LENGTH_SHORT).show()
+                val action = HomeFragmentDirections.actionGlobalSearchResultFragment(ListType.DEALS, DealType.HOTELS)
+                findNavController().navigate(action)
             }
             cars.root.setOnClickListener {
-                Toast.makeText(requireContext(), getString(R.string.cars), Toast.LENGTH_SHORT).show()
+                val action = HomeFragmentDirections.actionGlobalSearchResultFragment(ListType.DEALS, DealType.TRANSPORTATIONS)
+                findNavController().navigate(action)
             }
             taxi.root.setOnClickListener {
-                Toast.makeText(requireContext(), getString(R.string.taxi), Toast.LENGTH_SHORT).show()
+                val action = HomeFragmentDirections.actionGlobalSearchResultFragment(ListType.DEALS, DealType.TRANSPORTATIONS)
+                findNavController().navigate(action)
             }
         }
     }
@@ -97,5 +101,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onPause() {
         super.onPause()
         viewModel.setTabPosition(tabPosition)
+    }
+
+    enum class DealType(val category: String) {
+        FLIGHTS("flight"),
+        HOTELS("hotel"),
+        TRANSPORTATIONS("transportation")
     }
 }

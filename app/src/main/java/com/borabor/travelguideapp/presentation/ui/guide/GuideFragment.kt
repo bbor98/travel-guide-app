@@ -13,6 +13,7 @@ import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentGuideBinding
 import com.borabor.travelguideapp.domain.model.Category
 import com.borabor.travelguideapp.presentation.base.BaseFragment
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.checkQueryTextAndProceed
 import com.borabor.travelguideapp.util.handleBookmarkState
 import com.google.android.material.chip.Chip
@@ -115,7 +116,7 @@ class GuideFragment : BaseFragment<FragmentGuideBinding>(R.layout.fragment_guide
 
     private fun navigateWithQuery() {
         binding.search.etSearch.checkQueryTextAndProceed(this) { query ->
-            val action = GuideFragmentDirections.actionGuideFragmentToSearchResultFragment(query, getString(R.string.search_results_for, query))
+            val action = GuideFragmentDirections.actionGlobalSearchResultFragment(listType = ListType.ALL, query = query)
             findNavController().navigate(action)
         }
     }

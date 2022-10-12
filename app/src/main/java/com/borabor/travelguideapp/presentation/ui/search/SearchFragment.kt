@@ -12,6 +12,7 @@ import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.FragmentSearchBinding
 import com.borabor.travelguideapp.presentation.base.BaseFragment
 import com.borabor.travelguideapp.presentation.ui.home.HomeFragmentDirections
+import com.borabor.travelguideapp.util.ListType
 import com.borabor.travelguideapp.util.checkQueryTextAndProceed
 import com.borabor.travelguideapp.util.handleBookmarkState
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,7 +80,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     private fun navigateWithQuery() {
         binding.search.etSearch.checkQueryTextAndProceed(this) { query ->
-            val action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(query, getString(R.string.search_results_for, query))
+            val action = SearchFragmentDirections.actionGlobalSearchResultFragment(listType = ListType.ALL, query = query)
             findNavController().navigate(action)
         }
     }
