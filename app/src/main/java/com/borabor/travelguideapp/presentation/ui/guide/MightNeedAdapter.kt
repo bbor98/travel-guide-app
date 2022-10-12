@@ -3,14 +3,14 @@ package com.borabor.travelguideapp.presentation.ui.guide
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.borabor.travelguideapp.R
 import com.borabor.travelguideapp.databinding.ItemMightNeedBinding
 import com.borabor.travelguideapp.domain.model.Travel
+import com.borabor.travelguideapp.util.TravelDiffCallback
 
-class MightNeedAdapter(private val onItemClicked: (Travel) -> Unit) : ListAdapter<Travel, MightNeedAdapter.ViewHolder>(DiffCallback) {
+class MightNeedAdapter(private val onItemClicked: (Travel) -> Unit) : ListAdapter<Travel, MightNeedAdapter.ViewHolder>(TravelDiffCallback) {
     inner class ViewHolder(val view: ItemMightNeedBinding) : RecyclerView.ViewHolder(view.root) {
         init {
             view.root.setOnClickListener {
@@ -25,10 +25,5 @@ class MightNeedAdapter(private val onItemClicked: (Travel) -> Unit) : ListAdapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.view.travel = getItem(position)
-    }
-
-    object DiffCallback : DiffUtil.ItemCallback<Travel>() {
-        override fun areItemsTheSame(oldItem: Travel, newItem: Travel) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: Travel, newItem: Travel) = oldItem == newItem
     }
 }
