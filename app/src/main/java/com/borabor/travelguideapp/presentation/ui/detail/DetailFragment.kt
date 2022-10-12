@@ -27,7 +27,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     private fun getArgs() {
         val args = arguments?.let { DetailFragmentArgs.fromBundle(it) }
-        args?.let { binding.travel = it.travel }
+        args?.let {
+            binding.travel = it.travel
+            viewModel.setIsBookmark(it.travel.isBookmark)
+        }
+
     }
 
     private fun setupAdapter() {
@@ -51,7 +55,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
             btBookmark.setOnClickListener {
                 btBookmark.visibility = View.GONE
                 pbLoading.visibility = View.VISIBLE
-                viewModel.bookmark(travel!!.id, travel!!.isBookmark)
+                this@DetailFragment.viewModel.bookmark(travel!!.id, travel!!.isBookmark)
             }
         }
     }
@@ -60,7 +64,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         viewModel.isBookmark.observe(viewLifecycleOwner) { isBookmark ->
             isBookmark?.let {
                 binding.apply {
-                    travel = travel?.copy(isBookmark = it)
                     pbLoading.visibility = View.GONE
                     btBookmark.visibility = View.VISIBLE
                 }
@@ -91,6 +94,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     override fun onDestroy() {
         super.onDestroy()
+
+        viewModel.resetBookmarkState()
         requireActivity().findViewById<View>(R.id.fade).visibility = View.VISIBLE
     }
 }

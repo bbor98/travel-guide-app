@@ -36,6 +36,14 @@ class DetailViewModel @Inject constructor(private val updateBookmark: UpdateBook
         }
     }
 
+    fun setIsBookmark(isBookmark: Boolean) {
+        _isBookmark.value = isBookmark
+    }
+
+    fun resetBookmarkState() {
+        _bookmarkState.value = null
+    }
+
     fun setImagePosition(imagePosition: Int?) {
         _imagePosition.value = imagePosition
     }

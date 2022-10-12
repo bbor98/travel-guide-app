@@ -10,6 +10,10 @@
             type="com.borabor.travelguideapp.domain.model.Travel" />
 
         <variable
+            name="viewModel"
+            type="com.borabor.travelguideapp.presentation.ui.detail.DetailViewModel" />
+
+        <variable
             name="imagePosition"
             type="Integer" />
 
@@ -127,8 +131,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btBookmark"
             style="@style/AddButton"
+            android:text="@{viewModel.isBookmark ? @string/remove_bookmark : @string/add_bookmark}"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@{travel.isBookmark ? @string/remove_bookmark : @string/add_bookmark}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
