@@ -37,6 +37,11 @@ class GuideFragment : BaseFragment<FragmentGuideBinding>(R.layout.fragment_guide
         setupSearchBar()
         subscribeToObservables()
 
+        binding.tvSeeAll.setOnClickListener {
+            val action = GuideFragmentDirections.actionGlobalSearchResultFragment(ListType.MIGHT_NEEDS)
+            findNavController().navigate(action)
+        }
+
         binding.apiResponseState.btRetry.setOnClickListener {
             viewModel.retryConnection {
                 viewModel.fetchLists()

@@ -38,9 +38,32 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        style="@style/Subtitle"
-                        android:text="@string/might_need_these" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Subtitle"
+                            android:text="@string/might_need_these" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tvSeeAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/source_sans_pro_semibold"
+                            android:gravity="bottom"
+                            android:paddingStart="@dimen/margin_medium"
+                            android:paddingEnd="@dimen/margin_medium"
+                            android:text="@string/see_all"
+                            android:textColor="@color/pink"
+                            android:textSize="@dimen/text_small" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvMightNeed"

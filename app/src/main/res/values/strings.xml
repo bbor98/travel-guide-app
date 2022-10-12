@@ -46,6 +46,7 @@
     </plurals>
 
     <string name="might_need_these">MIGHT NEED THESE</string>
+    <string name="see_all"><u>See all</u></string>
     <string name="top_pick_articles">TOP-PICK ARTICLES</string>
 
     <string name="search_anything">A country, a city, a place… or anything </string>

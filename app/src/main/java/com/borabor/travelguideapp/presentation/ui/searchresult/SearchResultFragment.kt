@@ -54,7 +54,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
 
     private fun setTitle(searchType: ListType, dealType: HomeFragment.DealType) = when (searchType) {
         ListType.ALL -> getString(R.string.search_results_for, query)
-        ListType.MIGHT_NEEDS -> getString(R.string.might_need_these)
+        ListType.MIGHT_NEEDS -> getString(R.string.might_need_these).lowercase().capitalize()
         else -> when (dealType) {
             FLIGHTS -> getString(R.string.flights)
             HOTELS -> getString(R.string.hotels)
