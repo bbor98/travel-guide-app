@@ -6,12 +6,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="title"
-            type="String" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
     </data>
 
@@ -22,7 +18,7 @@
 
         <include
             layout="@layout/layout_image_background"
-            app:imageUrl="@{imageUrl}" />
+            app:imageUrl="@{travel.images[0].url}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +26,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="@dimen/margin_small"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:text="@{title}"
+            android:text="@{travel.title}"
             android:textColor="@color/white2"
             android:textSize="@dimen/title_small"
             tools:text="Title" />

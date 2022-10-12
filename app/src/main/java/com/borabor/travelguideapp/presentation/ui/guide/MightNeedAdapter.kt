@@ -24,12 +24,7 @@ class MightNeedAdapter(private val onItemClicked: (Travel) -> Unit) : ListAdapte
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-
-        holder.view.apply {
-            imageUrl = item.images.first().url
-            title = item.title
-        }
+        holder.view.travel = getItem(position)
     }
 
     object DiffCallback : DiffUtil.ItemCallback<Travel>() {

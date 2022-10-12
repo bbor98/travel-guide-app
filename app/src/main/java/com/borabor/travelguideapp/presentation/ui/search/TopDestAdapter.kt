@@ -26,9 +26,7 @@ class TopDestAdapter(private val onItemClicked: (Travel) -> Unit) : RecyclerView
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.imageUrl = list[position].images.first().url
-        holder.view.country = list[position].country
-        holder.view.city = list[position].city
+        holder.view.travel = list[position]
     }
 
     override fun getItemCount() = list.size

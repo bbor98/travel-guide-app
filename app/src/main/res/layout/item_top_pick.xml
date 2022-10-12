@@ -6,20 +6,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="description"
-            type="String" />
-
-        <variable
-            name="isBookmark"
-            type="Boolean" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
     </data>
 
@@ -42,7 +30,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    loadImage="@{imageUrl}"
+                    loadImage="@{travel.images[0].url}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_top_pick_image_height"
                     android:scaleType="centerCrop"
@@ -52,8 +40,8 @@
                     android:id="@+id/btBookmark"
                     style="@style/RoundButton"
                     layout="@layout/layout_round_button"
-                    app:icon="@{isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}"
-                    app:tint="@{isBookmark ? @color/pink : @color/white2}" />
+                    app:icon="@{travel.isBookmark ? @drawable/ic_baseline_bookmark : @drawable/ic_outline_bookmark}"
+                    app:tint="@{travel.isBookmark ? @color/pink : @color/white2}" />
 
             </FrameLayout>
 
@@ -64,7 +52,7 @@
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginTop="@dimen/space_large"
                 android:fontFamily="@font/source_sans_pro_semibold"
-                android:text="@{title}"
+                android:text="@{travel.title}"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/text_small"
                 tools:text="TITLE" />
@@ -77,7 +65,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:maxLines="2"
-                android:text="@{description}"
+                android:text="@{travel.description}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/title_small"
                 tools:text="Description" />

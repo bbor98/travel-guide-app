@@ -6,16 +6,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
-            name="country"
-            type="String" />
-
-        <variable
-            name="city"
-            type="String" />
+            name="travel"
+            type="com.borabor.travelguideapp.domain.model.Travel" />
 
     </data>
 
@@ -26,7 +18,7 @@
 
         <include
             layout="@layout/layout_image_background"
-            app:imageUrl="@{imageUrl}" />
+            app:imageUrl="@{travel.images[0].url}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@{city}"
+                android:text="@{travel.city}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/title_small"
@@ -49,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_small"
                 android:fontFamily="@font/source_sans_pro_regular"
-                android:text="@{country}"
+                android:text="@{travel.country}"
                 android:textAlignment="center"
                 android:textColor="@color/white2"
                 android:textSize="@dimen/text_normal"
