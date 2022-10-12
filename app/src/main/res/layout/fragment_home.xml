@@ -11,163 +11,170 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".presentation.ui.home.HomeFragment">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/banner_height"
-            android:scaleType="centerCrop"
-            android:src="@drawable/home_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/flights"
-            layout="@layout/layout_banner_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_large"
-            app:image="@{@drawable/ic_flight}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/hotels"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:name="@{@string/flights}" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/hotels"
-            layout="@layout/layout_banner_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_large"
-            app:image="@{@drawable/ic_hotel}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/cars"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/flights"
-            app:name="@{@string/hotels}" />
+            <include
+                android:id="@+id/flights"
+                layout="@layout/layout_banner_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                app:image="@{@drawable/ic_flight}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/hotels"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:name="@{@string/flights}" />
 
-        <include
-            android:id="@+id/cars"
-            layout="@layout/layout_banner_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_large"
-            app:image="@{@drawable/ic_car}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/taxi"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/hotels"
-            app:name="@{@string/cars}" />
+            <include
+                android:id="@+id/hotels"
+                layout="@layout/layout_banner_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                app:image="@{@drawable/ic_hotel}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/cars"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/flights"
+                app:name="@{@string/hotels}" />
 
-        <include
-            android:id="@+id/taxi"
-            layout="@layout/layout_banner_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_large"
-            app:image="@{@drawable/ic_taxi}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cars"
-            app:name="@{@string/taxi}" />
+            <include
+                android:id="@+id/cars"
+                layout="@layout/layout_banner_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                app:image="@{@drawable/ic_car}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/taxi"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/hotels"
+                app:name="@{@string/cars}" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_large"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:text="@string/next_destination"
-            android:textColor="@color/white2"
-            android:textSize="@dimen/home_title_size"
-            app:layout_constraintBottom_toTopOf="@+id/flights"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            <include
+                android:id="@+id/taxi"
+                layout="@layout/layout_banner_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                app:image="@{@drawable/ic_taxi}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cars"
+                app:name="@{@string/taxi}" />
 
             <TextView
-                style="@style/Subtitle"
-                android:text="@string/deals" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tlDeals"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/tab_height_home"
-                android:layout_marginTop="@dimen/space_medium"
-                android:background="@color/white"
-                app:tabIndicatorColor="@color/pink"
-                app:tabIndicatorFullWidth="false"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/pink"
-                app:tabTextAppearance="@style/HomeTabTextAppearance"
-                app:tabTextColor="@color/gray3">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@string/next_destination"
+                android:textColor="@color/white2"
+                android:textSize="@dimen/home_title_size"
+                app:layout_constraintBottom_toTopOf="@+id/flights"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/all" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/flights" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hotels" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/transportations" />
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDeals"
-                    isVisible="@{viewModel.uiState.success}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/margin_medium"
-                    android:paddingTop="@dimen/margin_medium"
-                    android:paddingEnd="@dimen/recyclerview_padding_end"
-                    android:paddingBottom="@dimen/margin_medium"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <TextView
+                    style="@style/Subtitle"
+                    android:text="@string/deals" />
 
-                <include
-                    android:id="@+id/apiResponseState"
-                    layout="@layout/layout_api_response_state"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tlDeals"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/home_api_response_state_height"
-                    android:layout_gravity="center"
-                    app:isError="@{viewModel.uiState.error}"
-                    app:isLoading="@{viewModel.uiState.loading}" />
+                    android:layout_height="@dimen/tab_height_home"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:background="@color/white"
+                    app:tabIndicatorColor="@color/pink"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/pink"
+                    app:tabTextAppearance="@style/HomeTabTextAppearance"
+                    app:tabTextColor="@color/gray3">
 
-            </FrameLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all" />
 
-        </LinearLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/flights" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hotels" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transportations" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDeals"
+                        isVisible="@{viewModel.uiState.success}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin_medium"
+                        android:paddingTop="@dimen/margin_medium"
+                        android:paddingEnd="@dimen/recyclerview_padding_end"
+                        android:paddingBottom="@dimen/recyclerview_padding_bottom_medium"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <include
+                        android:id="@+id/apiResponseState"
+                        layout="@layout/layout_api_response_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/home_api_response_state_height"
+                        android:layout_gravity="center"
+                        app:isError="@{viewModel.uiState.error}"
+                        app:isLoading="@{viewModel.uiState.loading}" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
