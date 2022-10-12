@@ -9,15 +9,15 @@
 Bu proje, **MVVM design pattern**'i ve **clean architecture** prensipleri uygulanarak ve bir [mockApi](https://6339f07e471b8c3955686976.mockapi.io/travel_list) kullanılarak tasarlanmıştır. Proje tamamen **Kotlin** ile yazılmış olup **single activity** mimarisi izlenmiştir. 
 
 ## 📷 Ekran Görüntüleri
-Home|Search|Search Results
+Home Screen|Search Screen|Search Results Screen
 :-:|:-:|:-:
 ![home](https://user-images.githubusercontent.com/88214480/195253745-d858e0eb-6750-4d19-abd2-2bf7ed335aab.jpg) | ![search](https://user-images.githubusercontent.com/88214480/195253806-ed4e366a-0218-423c-91dd-2204d6bcd5f6.jpg) | ![search_results](https://user-images.githubusercontent.com/88214480/195253834-c9d419be-d2b2-4f8a-8873-e21185ee8072.jpg)
 
-|Trip Plan(Trips)|Trip (Adding Trip)|Trip (Bookmarks)|
+|Trip Screen (Trips)|Trip Screen (Adding Trip)|Trip Screen (Bookmarks)|
 :-:|:-:|:-:
 ![trip_trips](https://user-images.githubusercontent.com/88214480/195253920-3203d407-2d96-4cac-953e-6cac6559d3b0.jpg) | ![trip_adding_trip](https://user-images.githubusercontent.com/88214480/195254948-6eeda5fd-dab0-4973-bb67-43bc97039ed0.jpg) | ![trip_bookmarks](https://user-images.githubusercontent.com/88214480/195253973-6ed5bfdc-60b1-4dd5-bcc2-f240fcaef7f3.jpg)
 
-Guide|Detail|Fullscreen Image
+Guide Screen|Detail Screen|Fullscreen Image
 :-:|:-:|:-:
 ![guide](https://user-images.githubusercontent.com/88214480/195253977-3c4e9376-06b1-434e-96b2-a025759f70b5.jpg) | ![detail](https://user-images.githubusercontent.com/88214480/195253991-24cebdb7-3084-4119-82e1-8067e24a3cd6.jpg) | ![fullscreen_image](https://user-images.githubusercontent.com/88214480/195254003-031f85d5-0fb2-41da-9388-ed232490a8b1.jpg) |
 
