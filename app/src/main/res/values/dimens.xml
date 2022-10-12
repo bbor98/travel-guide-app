@@ -30,7 +30,7 @@
 
     <dimen name="recyclerview_padding_end">4dp</dimen>
     <dimen name="recyclerview_padding_bottom_large">176dp</dimen>
-    <dimen name="recyclerview_padding_bottom_medium">96dp</dimen>
+    <dimen name="recyclerview_padding_bottom_medium">112dp</dimen>
     <dimen name="recyclerview_padding_bottom_small">56dp</dimen>
 
     <dimen name="round_button_size">40dp</dimen>
