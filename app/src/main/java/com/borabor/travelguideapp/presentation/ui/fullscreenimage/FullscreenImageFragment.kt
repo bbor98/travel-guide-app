@@ -24,10 +24,7 @@ class FullscreenImageFragment : BaseFragment<FragmentFullscreenImageBinding>(R.l
         super.onViewCreated(view, savedInstanceState)
 
         getArgs()
-
-        binding.btClose.root.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        setupClickListeners()
     }
 
     private fun getArgs() {
@@ -67,5 +64,11 @@ class FullscreenImageFragment : BaseFragment<FragmentFullscreenImageBinding>(R.l
         WindowInsetsControllerCompat(requireActivity().window, binding.frameLayout).show(WindowInsetsCompat.Type.systemBars())
 
         binding.isFullscreen = false
+    }
+
+    private fun setupClickListeners(){
+        binding.btClose.root.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

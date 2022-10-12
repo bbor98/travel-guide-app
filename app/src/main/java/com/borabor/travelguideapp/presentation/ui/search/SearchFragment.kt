@@ -31,10 +31,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupClickListeners()
         setupSearchBar()
         setupAdapters()
         subscribeToObservables()
+    }
 
+    private fun setupClickListeners() {
         binding.apiResponseState.btRetry.setOnClickListener {
             viewModel.retryConnection {
                 viewModel.fetchLists()

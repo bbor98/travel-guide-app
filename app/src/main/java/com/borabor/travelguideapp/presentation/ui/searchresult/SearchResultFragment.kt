@@ -29,15 +29,10 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
         super.onViewCreated(view, savedInstanceState)
 
         getArgs()
+        setClickListeners()
         setupToolbar()
         setupAdapter()
         subscribeToObservable()
-
-        binding.apiResponseState.btRetry.setOnClickListener {
-            viewModel.retryConnection {
-                viewModel.getResults(listType, dealType, query)
-            }
-        }
     }
 
     private fun getArgs() {
@@ -59,6 +54,14 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
             FLIGHTS -> getString(R.string.flights)
             HOTELS -> getString(R.string.hotels)
             TRANSPORTATIONS -> getString(R.string.transportations)
+        }
+    }
+
+    private fun setClickListeners() {
+        binding.apiResponseState.btRetry.setOnClickListener {
+            viewModel.retryConnection {
+                viewModel.getResults(listType, dealType, query)
+            }
         }
     }
 

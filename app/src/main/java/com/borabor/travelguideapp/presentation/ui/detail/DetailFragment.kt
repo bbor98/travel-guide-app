@@ -20,8 +20,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
         requireActivity().findViewById<View>(R.id.fade).visibility = View.GONE
         getArgs()
+        setupClickListeners()
         setupAdapter()
-        setupViewClickListeners()
         subscribeToObservable()
     }
 
@@ -34,14 +34,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     }
 
-    private fun setupAdapter() {
-        ImageAdapter { binding.imagePosition = it }.apply {
-            binding.rvImages.adapter = this
-            submitList(binding.travel!!.images)
-        }
-    }
-
-    private fun setupViewClickListeners() {
+    private fun setupClickListeners() {
         binding.apply {
             btBack.root.setOnClickListener {
                 findNavController().navigateUp()
@@ -57,6 +50,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                 pbLoading.visibility = View.VISIBLE
                 this@DetailFragment.viewModel.bookmark(travel!!.id, travel!!.isBookmark)
             }
+        }
+    }
+
+    private fun setupAdapter() {
+        ImageAdapter { binding.imagePosition = it }.apply {
+            binding.rvImages.adapter = this
+            submitList(binding.travel!!.images)
         }
     }
 

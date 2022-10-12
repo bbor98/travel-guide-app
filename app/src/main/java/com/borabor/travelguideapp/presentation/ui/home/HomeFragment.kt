@@ -23,11 +23,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupClickListeners()
         setupBannerButtons()
         setupTabLayout()
         setupAdapter()
         subscribeToObservable()
+    }
 
+    private fun setupClickListeners() {
         binding.apiResponseState.btRetry.setOnClickListener {
             viewModel.retryConnection {
                 viewModel.fetchDealList()

@@ -63,10 +63,13 @@ class TripFragment : BaseFragment<FragmentTripBinding>(R.layout.fragment_trip) {
 
         binding.rvTripPlan.adapter = if (viewModel.tabPosition.value == 0) adapterTrip else adapterBookmark
 
+        setupClickListeners()
         setupTabLayout()
         setupBottomSheetDialog()
         subscribeToObservables()
+    }
 
+    private fun setupClickListeners() {
         binding.fabAddTrip.setOnClickListener {
             viewModel.fetchTravelList()
             bottomSheetDialog.show()

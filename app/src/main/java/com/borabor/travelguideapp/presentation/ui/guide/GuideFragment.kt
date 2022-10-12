@@ -33,10 +33,13 @@ class GuideFragment : BaseFragment<FragmentGuideBinding>(R.layout.fragment_guide
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupClickListeners()
         setupAdapters()
         setupSearchBar()
         subscribeToObservables()
+    }
 
+    private fun setupClickListeners() {
         binding.tvSeeAll.setOnClickListener {
             val action = GuideFragmentDirections.actionGlobalSearchResultFragment(ListType.MIGHT_NEEDS)
             findNavController().navigate(action)
